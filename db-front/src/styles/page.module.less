@@ -1,0 +1,20 @@
+@import './theme.less';
+.Page {
+  &Title {
+    font-size: 22px;
+    padding-left: 12px;
+    position: relative;
+    box-sizing: content-box;
+    margin-bottom: 16px;
+    &::before {
+      content: ' ';
+      position: absolute;
+      background-color: @primary-color;
+      border-radius: 3px;
+      top: 15%;
+      left: 2px;
+      width: 6px;
+      height: 70%;
+    }
+  }
+}
