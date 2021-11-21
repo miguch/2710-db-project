@@ -4,10 +4,34 @@ import { Table } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 import useAntTable from '../../Hooks/Table';
 
+const SCHEMA = [
+  {
+    title: 'Product ID',
+    name: 'productId',
+  },
+  {
+    title: 'Name',
+    name: 'name',
+  },
+  {
+    title: 'Inventory amount',
+    name: 'inventory',
+  },
+  {
+    title: 'Price',
+    name: 'price',
+  },
+  {
+    title: 'Kind',
+    name: 'kind',
+  }
+]
+
 export default function Customer() {
   const dataLoader = (async () => {}, []);
-  const { onTableChange, pagination, loading, tableData } = useAntTable(
+  const { onTableChange, pagination, columns, loading, tableData } = useAntTable(
     dataLoader,
+    SCHEMA,
     [
       {
         productId: '123',
@@ -18,33 +42,6 @@ export default function Customer() {
       }
     ]
   );
-  const columns = [
-    {
-      title: 'Product ID',
-      dataIndex: 'productId',
-      key: 'productId'
-    },
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name'
-    },
-    {
-      title: 'Inventory amount',
-      dataIndex: 'inventory',
-      key: 'inventory'
-    },
-    {
-      title: 'Price',
-      dataIndex: 'price',
-      key: 'price'
-    },
-    {
-      title: 'Kind',
-      dataIndex: 'kind',
-      key: 'kind'
-    }
-  ];
 
   return (
     <div>
