@@ -501,6 +501,9 @@ module.exports = {
       }
 
       const user = await strapi.query('user', 'users-permissions').create(params);
+      
+      const cus = await strapi.query('customers').create(params);
+      const sp = await strapi.query('salesperson').create(params);
 
       const sanitizedUser = sanitizeEntity(user, {
         model: strapi.query('user', 'users-permissions').model,
