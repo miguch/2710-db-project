@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stores",
+  "info": {
+    "name": "Store",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Store_id": {
+      "type": "string"
+    },
+    "manager": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "num_salesperson": {
+      "type": "integer"
+    },
+    "region": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "store_saleperson": {
+      "collection": "sales-person",
+      "via": "store"
+    },
+    "region_store": {
+      "model": "region"
+    }
+  }
+}

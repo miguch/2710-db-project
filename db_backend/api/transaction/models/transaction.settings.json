@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transactions",
+  "info": {
+    "name": "transaction",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order_number": {
+      "type": "string"
+    },
+    "sale_date": {
+      "type": "date"
+    },
+    "saleperson": {
+      "type": "string"
+    },
+    "product_id": {
+      "type": "string"
+    },
+    "cust_id": {
+      "type": "string"
+    },
+    "trans_sale": {
+      "collection": "sales-person",
+      "via": "transactions"
+    },
+    "tran_pd": {
+      "collection": "pd",
+      "via": "PR_tran"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sales_people",
+  "info": {
+    "name": "SalesPerson",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sp_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "job_title": {
+      "type": "string"
+    },
+    "store_assigned": {
+      "type": "string",
+      "required": true
+    },
+    "salary": {
+      "type": "float"
+    },
+    "region": {
+      "model": "region",
+      "via": "sales_people"
+    },
+    "store": {
+      "via": "store_saleperson",
+      "model": "store"
+    },
+    "transactions": {
+      "via": "trans_sale",
+      "collection": "transaction",
+      "dominant": true
+    }
+  }
+}

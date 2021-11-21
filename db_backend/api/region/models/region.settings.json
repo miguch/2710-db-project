@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "regions",
+  "info": {
+    "name": "region"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "region_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "region_name": {
+      "type": "string"
+    },
+    "region_manager": {
+      "type": "string"
+    },
+    "sales_people": {
+      "via": "region",
+      "collection": "sales-person"
+    }
+  }
+}

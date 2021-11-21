@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pds",
+  "info": {
+    "name": "PD",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "pd_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "amount": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "price": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "PR_tran": {
+      "via": "tran_pd",
+      "collection": "transaction",
+      "dominant": true
+    }
+  }
+}

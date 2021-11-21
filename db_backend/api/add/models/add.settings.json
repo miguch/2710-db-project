@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "adds",
+  "info": {
+    "name": "add"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "add_id": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "street": {
+      "type": "text"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zipcode": {
+      "type": "biginteger"
+    }
+  }
+}

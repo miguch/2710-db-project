@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/sales-people",
+      "handler": "sales-person.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sales-people/count",
+      "handler": "sales-person.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/sales-people/:id",
+      "handler": "sales-person.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/sales-people",
+      "handler": "sales-person.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/sales-people/:id",
+      "handler": "sales-person.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/sales-people/:id",
+      "handler": "sales-person.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

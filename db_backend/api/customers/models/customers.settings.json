@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customers",
+  "info": {
+    "name": "customers",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "customer_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "marriage": {
+      "type": "enumeration",
+      "enum": [
+        "married",
+        "unmarried"
+      ]
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "Man",
+        "Woman"
+      ]
+    },
+    "Age": {
+      "type": "integer"
+    },
+    "income": {
+      "type": "float"
+    },
+    "cus_tran": {
+      "collection": "transaction"
+    }
+  }
+}
