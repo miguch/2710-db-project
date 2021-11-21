@@ -23,6 +23,7 @@ services:
       DB_URL: db
       DB_USERNAME: ${DB_USER}
       DB_PASSWORD: ${DB_PASS}
+      DB_BASEURL: https://2710.miguch.com/api
     restart: always
     
   db:
