@@ -1,6 +1,7 @@
 # 1. build frontend code
 FROM node:14.16.0 AS build-stage
 COPY . .
+RUN rm -rf node_modules
 RUN yarn
 RUN yarn build
 

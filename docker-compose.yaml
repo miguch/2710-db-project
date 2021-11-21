@@ -1,0 +1,39 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./db-front
+    container_name: db-docker-web
+    ports:
+      - "80:80"
+    restart: always
+  
+  api:
+    build:
+      context: ./db_backend
+    ports:
+      - '1337:1337'
+    expose:
+      - 1337
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      DB_URL: db
+      DB_USERNAME: ${DB_USER}
+      DB_PASSWORD: ${DB_PASS}
+    
+  db:
+    image: mariadb:10
+    volumes:
+      - ./.data:/var/lib/mysql
+    expose:
+      - 3306
+    environment:
+      # replaced with secrets when deployed
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MARIADB_DATABASE: final
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
+ 
