@@ -516,14 +516,10 @@
     "schemas": {
       "Region": {
         "required": [
-          "id",
-          "region_id"
+          "id"
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "region_id": {
             "type": "string"
           },
           "region_name": {
@@ -594,13 +590,7 @@
         }
       },
       "NewRegion": {
-        "required": [
-          "region_id"
-        ],
         "properties": {
-          "region_id": {
-            "type": "string"
-          },
           "region_name": {
             "type": "string"
           },

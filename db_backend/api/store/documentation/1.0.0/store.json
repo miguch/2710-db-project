@@ -594,14 +594,10 @@
           },
           "region_store": {
             "required": [
-              "id",
-              "region_id"
+              "id"
             ],
             "properties": {
               "id": {
-                "type": "string"
-              },
-              "region_id": {
                 "type": "string"
               },
               "region_name": {

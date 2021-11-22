@@ -4,29 +4,25 @@ import useAntTable from '../Hooks/Table';
 import useDataPage from '../Hooks/DataPage';
 import useDataHandlers from '../Hooks/Data';
 
-const TITLE = 'Store';
+const TITLE = 'Region';
 const SCHEMA = [
   {
-    title: 'Store ID',
+    title: 'Region ID',
     name: 'id',
     key: true,
     formHidden: true
   },
   {
+    title: 'Name',
+    name: 'region_name'
+  },
+  {
     title: 'Manager',
-    name: 'manager'
+    name: 'region_manager'
   },
-  {
-    title: 'Salespersons',
-    name: 'num_salesperson'
-  },
-  {
-    title: 'Region',
-    name: 'region'
-  }
 ];
 
-const apiName = 'stores';
+const apiName = 'regions';
 const API = {
   get: `/${apiName}`,
   create: `/${apiName}`,

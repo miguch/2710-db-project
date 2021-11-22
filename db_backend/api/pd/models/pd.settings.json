@@ -29,14 +29,14 @@
     "description": {
       "type": "richtext"
     },
-    "PR_tran": {
-      "via": "tran_pd",
-      "collection": "transaction",
-      "dominant": true
-    },
     "product_type": {
       "via": "pds",
       "model": "product-kind"
+    },
+    "PR_tran": {
+      "via": "products",
+      "collection": "transaction",
+      "dominant": true
     }
   }
 }

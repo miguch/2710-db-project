@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/22/2021 4:07:29 PM"
+    "x-generation-date": "11/22/2021 5:11:38 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -6981,6 +6981,12 @@
               "home_customer": {
                 "type": "string"
               },
+              "transactions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -7036,32 +7042,20 @@
                 "id": {
                   "type": "string"
                 },
-                "order_number": {
-                  "type": "string"
-                },
                 "sale_date": {
                   "type": "string"
                 },
-                "saleperson": {
+                "salesperson": {
                   "type": "string"
                 },
-                "product_id": {
-                  "type": "string"
-                },
-                "cust_id": {
-                  "type": "string"
-                },
-                "trans_sale": {
+                "products": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "tran_pd": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "customer": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -7207,6 +7201,40 @@
                 "type": "string"
               }
             }
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "sale_date": {
+                  "type": "string"
+                },
+                "salesperson": {
+                  "type": "string"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -7245,6 +7273,12 @@
           },
           "home_customer": {
             "type": "string"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"
@@ -7326,6 +7360,12 @@
               "home_customer": {
                 "type": "string"
               },
+              "transactions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -7404,52 +7444,6 @@
           "description": {
             "type": "string"
           },
-          "PR_tran": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "order_number": {
-                  "type": "string"
-                },
-                "sale_date": {
-                  "type": "string"
-                },
-                "saleperson": {
-                  "type": "string"
-                },
-                "product_id": {
-                  "type": "string"
-                },
-                "cust_id": {
-                  "type": "string"
-                },
-                "trans_sale": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tran_pd": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "product_type": {
             "required": [
               "id"
@@ -7472,6 +7466,40 @@
               },
               "updated_by": {
                 "type": "string"
+              }
+            }
+          },
+          "PR_tran": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "sale_date": {
+                  "type": "string"
+                },
+                "salesperson": {
+                  "type": "string"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -7498,14 +7526,14 @@
           "description": {
             "type": "string"
           },
+          "product_type": {
+            "type": "string"
+          },
           "PR_tran": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "product_type": {
-            "type": "string"
           },
           "created_by": {
             "type": "string"
@@ -7592,14 +7620,10 @@
       },
       "Region": {
         "required": [
-          "id",
-          "region_id"
+          "id"
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "region_id": {
             "type": "string"
           },
           "region_name": {
@@ -7670,13 +7694,7 @@
         }
       },
       "NewRegion": {
-        "required": [
-          "region_id"
-        ],
         "properties": {
-          "region_id": {
-            "type": "string"
-          },
           "region_name": {
             "type": "string"
           },
@@ -7717,14 +7735,10 @@
           },
           "region": {
             "required": [
-              "id",
-              "region_id"
+              "id"
             ],
             "properties": {
               "id": {
-                "type": "string"
-              },
-              "region_id": {
                 "type": "string"
               },
               "region_name": {
@@ -7780,52 +7794,6 @@
               },
               "updated_by": {
                 "type": "string"
-              }
-            }
-          },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "order_number": {
-                  "type": "string"
-                },
-                "sale_date": {
-                  "type": "string"
-                },
-                "saleperson": {
-                  "type": "string"
-                },
-                "product_id": {
-                  "type": "string"
-                },
-                "cust_id": {
-                  "type": "string"
-                },
-                "trans_sale": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tran_pd": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
               }
             }
           },
@@ -7886,6 +7854,40 @@
           "zipcode": {
             "type": "integer"
           },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "sale_date": {
+                  "type": "string"
+                },
+                "salesperson": {
+                  "type": "string"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -7912,12 +7914,6 @@
           "store": {
             "type": "string"
           },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "user": {
             "type": "string"
           },
@@ -7932,6 +7928,12 @@
           },
           "zipcode": {
             "type": "integer"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
@@ -8025,14 +8027,10 @@
           },
           "region_store": {
             "required": [
-              "id",
-              "region_id"
+              "id"
             ],
             "properties": {
               "id": {
-                "type": "string"
-              },
-              "region_id": {
                 "type": "string"
               },
               "region_name": {
@@ -8097,82 +8095,67 @@
           "id": {
             "type": "string"
           },
-          "order_number": {
-            "type": "string"
-          },
           "sale_date": {
             "type": "string",
             "format": "date"
           },
-          "saleperson": {
-            "type": "string"
-          },
-          "product_id": {
-            "type": "string"
-          },
-          "cust_id": {
-            "type": "string"
-          },
-          "trans_sale": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "store_assigned"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "job_title": {
-                  "type": "string"
-                },
-                "store_assigned": {
-                  "type": "string"
-                },
-                "salary": {
-                  "type": "number"
-                },
-                "region": {
-                  "type": "string"
-                },
-                "store": {
-                  "type": "string"
-                },
-                "transactions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "user": {
-                  "type": "string"
-                },
-                "street": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "zipcode": {
-                  "type": "integer"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
+          "salesperson": {
+            "required": [
+              "id",
+              "store_assigned"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "job_title": {
+                "type": "string"
+              },
+              "store_assigned": {
+                "type": "string"
+              },
+              "salary": {
+                "type": "number"
+              },
+              "region": {
+                "type": "string"
+              },
+              "store": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "integer"
+              },
+              "transactions": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
-          "tran_pd": {
+          "products": {
             "type": "array",
             "items": {
               "required": [
@@ -8197,14 +8180,14 @@
                 "description": {
                   "type": "string"
                 },
+                "product_type": {
+                  "type": "string"
+                },
                 "PR_tran": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "product_type": {
-                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -8214,38 +8197,82 @@
                 }
               }
             }
+          },
+          "customer": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "cus_tran": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "user": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "integer"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "home",
+                  "business"
+                ]
+              },
+              "business_customer": {
+                "type": "string"
+              },
+              "home_customer": {
+                "type": "string"
+              },
+              "transactions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
       "NewTransaction": {
         "properties": {
-          "order_number": {
-            "type": "string"
-          },
           "sale_date": {
             "type": "string",
             "format": "date"
           },
-          "saleperson": {
+          "salesperson": {
             "type": "string"
           },
-          "product_id": {
-            "type": "string"
-          },
-          "cust_id": {
-            "type": "string"
-          },
-          "trans_sale": {
+          "products": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "tran_pd": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "customer": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

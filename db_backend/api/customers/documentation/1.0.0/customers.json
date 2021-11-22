@@ -532,32 +532,20 @@
                 "id": {
                   "type": "string"
                 },
-                "order_number": {
-                  "type": "string"
-                },
                 "sale_date": {
                   "type": "string"
                 },
-                "saleperson": {
+                "salesperson": {
                   "type": "string"
                 },
-                "product_id": {
-                  "type": "string"
-                },
-                "cust_id": {
-                  "type": "string"
-                },
-                "trans_sale": {
+                "products": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "tran_pd": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
+                "customer": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -703,6 +691,40 @@
                 "type": "string"
               }
             }
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "sale_date": {
+                  "type": "string"
+                },
+                "salesperson": {
+                  "type": "string"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -741,6 +763,12 @@
           },
           "home_customer": {
             "type": "string"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

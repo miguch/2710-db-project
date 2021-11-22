@@ -4,58 +4,38 @@ import useAntTable from '../Hooks/Table';
 import useDataPage from '../Hooks/DataPage';
 import useDataHandlers from '../Hooks/Data';
 
-const TITLE = 'Salesperson';
+const TITLE = 'Transactions';
 const SCHEMA = [
   {
-    title: 'Salesperson ID',
+    title: 'Transactions ID',
     name: 'id',
     key: true,
     formHidden: true
   },
   {
-    title: 'Name',
-    name: 'name',
-    render: (_, item) => item.user.username
+    title: 'Manager',
+    name: 'manager'
   },
   {
-    title: 'Street',
-    name: 'street'
+    title: 'Salespersons',
+    name: 'num_salesperson'
   },
+  
   {
-    title: 'State',
-    name: 'state'
-  },
-  {
-    title: 'Zip',
-    name: 'zipcode'
-  },
-  {
-    title: 'Job Title',
-    name: 'job_title'
-  },
-  {
-    title: 'Store',
-    name: 'store_assigned'
-  },
-  {
-    title: 'Salary',
-    name: 'salary'
-  },
-  {
-    title: 'Detail',
-    render: (_, item) => <Button>Show Details</Button>
+    title: 'Date',
+    name: 'sale_date'
   }
 ];
 
-const apiName = 'sales-people';
+const apiName = 'transactions';
 const API = {
-  get: `/${apiName}`
+  get: `/${apiName}`,
   // create: `/${apiName}`,
   // update: (id) => `/${apiName}/${id}`,
   // delete: (id) => `/${apiName}/${id}`
 };
 
-export default function Salesperson() {
+export default function Transactions() {
   const handlers = useDataHandlers(API);
 
   const page = useDataPage(TITLE, SCHEMA, handlers.dataLoader, handlers, []);

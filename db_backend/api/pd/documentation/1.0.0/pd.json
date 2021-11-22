@@ -539,52 +539,6 @@
           "description": {
             "type": "string"
           },
-          "PR_tran": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "order_number": {
-                  "type": "string"
-                },
-                "sale_date": {
-                  "type": "string"
-                },
-                "saleperson": {
-                  "type": "string"
-                },
-                "product_id": {
-                  "type": "string"
-                },
-                "cust_id": {
-                  "type": "string"
-                },
-                "trans_sale": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tran_pd": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "product_type": {
             "required": [
               "id"
@@ -607,6 +561,40 @@
               },
               "updated_by": {
                 "type": "string"
+              }
+            }
+          },
+          "PR_tran": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "sale_date": {
+                  "type": "string"
+                },
+                "salesperson": {
+                  "type": "string"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -633,14 +621,14 @@
           "description": {
             "type": "string"
           },
+          "product_type": {
+            "type": "string"
+          },
           "PR_tran": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "product_type": {
-            "type": "string"
           },
           "created_by": {
             "type": "string"

@@ -30,11 +30,6 @@
       "via": "store_saleperson",
       "model": "store"
     },
-    "transactions": {
-      "via": "trans_sale",
-      "collection": "transaction",
-      "dominant": true
-    },
     "user": {
       "plugin": "users-permissions",
       "model": "user"
@@ -50,6 +45,10 @@
     },
     "zipcode": {
       "type": "integer"
+    },
+    "transactions": {
+      "via": "salesperson",
+      "collection": "transaction"
     }
   }
 }

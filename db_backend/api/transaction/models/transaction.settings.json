@@ -12,28 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "order_number": {
-      "type": "string"
-    },
     "sale_date": {
       "type": "date"
     },
-    "saleperson": {
-      "type": "string"
+    "salesperson": {
+      "model": "sales-person",
+      "via": "transactions"
     },
-    "product_id": {
-      "type": "string"
+    "products": {
+      "collection": "pd",
+      "via": "PR_tran"
     },
-    "cust_id": {
-      "type": "string"
-    },
-    "trans_sale": {
-      "via": "transactions",
-      "collection": "sales-person"
-    },
-    "tran_pd": {
-      "via": "PR_tran",
-      "collection": "pd"
+    "customer": {
+      "model": "customers",
+      "via": "transactions"
     }
   }
 }

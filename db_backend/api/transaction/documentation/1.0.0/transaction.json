@@ -522,82 +522,67 @@
           "id": {
             "type": "string"
           },
-          "order_number": {
-            "type": "string"
-          },
           "sale_date": {
             "type": "string",
             "format": "date"
           },
-          "saleperson": {
-            "type": "string"
-          },
-          "product_id": {
-            "type": "string"
-          },
-          "cust_id": {
-            "type": "string"
-          },
-          "trans_sale": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "store_assigned"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "job_title": {
-                  "type": "string"
-                },
-                "store_assigned": {
-                  "type": "string"
-                },
-                "salary": {
-                  "type": "number"
-                },
-                "region": {
-                  "type": "string"
-                },
-                "store": {
-                  "type": "string"
-                },
-                "transactions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "user": {
-                  "type": "string"
-                },
-                "street": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "zipcode": {
-                  "type": "integer"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
+          "salesperson": {
+            "required": [
+              "id",
+              "store_assigned"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "job_title": {
+                "type": "string"
+              },
+              "store_assigned": {
+                "type": "string"
+              },
+              "salary": {
+                "type": "number"
+              },
+              "region": {
+                "type": "string"
+              },
+              "store": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "integer"
+              },
+              "transactions": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
-          "tran_pd": {
+          "products": {
             "type": "array",
             "items": {
               "required": [
@@ -622,14 +607,14 @@
                 "description": {
                   "type": "string"
                 },
+                "product_type": {
+                  "type": "string"
+                },
                 "PR_tran": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "product_type": {
-                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -639,38 +624,82 @@
                 }
               }
             }
+          },
+          "customer": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "cus_tran": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "user": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "integer"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "home",
+                  "business"
+                ]
+              },
+              "business_customer": {
+                "type": "string"
+              },
+              "home_customer": {
+                "type": "string"
+              },
+              "transactions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
       "NewTransaction": {
         "properties": {
-          "order_number": {
-            "type": "string"
-          },
           "sale_date": {
             "type": "string",
             "format": "date"
           },
-          "saleperson": {
+          "salesperson": {
             "type": "string"
           },
-          "product_id": {
-            "type": "string"
-          },
-          "cust_id": {
-            "type": "string"
-          },
-          "trans_sale": {
+          "products": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "tran_pd": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "customer": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

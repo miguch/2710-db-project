@@ -38,6 +38,27 @@ const STATIC_ROUTES = [
     component: lazy(() => import("../Pages/ProductKind")),
     icon: ContactsOutlined,
   },
+  {
+    name: 'Store',
+    link: '/store',
+    path: '/store',
+    component: lazy(() => import("../Pages/Store")),
+    icon: ContactsOutlined,
+  },
+  {
+    name: 'Region',
+    link: '/region',
+    path: '/region',
+    component: lazy(() => import("../Pages/Region")),
+    icon: ContactsOutlined,
+  },
+  {
+    name: 'Transaction',
+    link: '/transaction',
+    path: '/transaction',
+    component: lazy(() => import("../Pages/Transaction")),
+    icon: ContactsOutlined,
+  },
 ];
 
 export default STATIC_ROUTES;

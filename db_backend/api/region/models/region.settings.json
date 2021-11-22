@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "region_id": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "region_name": {
       "type": "string"
     },

@@ -547,14 +547,10 @@
           },
           "region": {
             "required": [
-              "id",
-              "region_id"
+              "id"
             ],
             "properties": {
               "id": {
-                "type": "string"
-              },
-              "region_id": {
                 "type": "string"
               },
               "region_name": {
@@ -610,52 +606,6 @@
               },
               "updated_by": {
                 "type": "string"
-              }
-            }
-          },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "order_number": {
-                  "type": "string"
-                },
-                "sale_date": {
-                  "type": "string"
-                },
-                "saleperson": {
-                  "type": "string"
-                },
-                "product_id": {
-                  "type": "string"
-                },
-                "cust_id": {
-                  "type": "string"
-                },
-                "trans_sale": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tran_pd": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
               }
             }
           },
@@ -716,6 +666,40 @@
           "zipcode": {
             "type": "integer"
           },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "sale_date": {
+                  "type": "string"
+                },
+                "salesperson": {
+                  "type": "string"
+                },
+                "products": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "customer": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -742,12 +726,6 @@
           "store": {
             "type": "string"
           },
-          "transactions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "user": {
             "type": "string"
           },
@@ -762,6 +740,12 @@
           },
           "zipcode": {
             "type": "integer"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
