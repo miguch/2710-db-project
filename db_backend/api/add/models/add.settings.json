@@ -2,12 +2,13 @@
   "kind": "collectionType",
   "collectionName": "adds",
   "info": {
-    "name": "add"
+    "name": "address",
+    "description": ""
   },
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

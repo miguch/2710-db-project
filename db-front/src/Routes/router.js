@@ -14,14 +14,21 @@ const STATIC_ROUTES = [
     name: 'Customer',
     link: '/customer',
     path: '/customer',
-    component: lazy(() => import("../Pages/Customers/Customers")),
+    component: lazy(() => import("../Pages/Customers")),
     icon: ContactsOutlined,
   },
   {
     name: 'Product',
     link: '/product',
     path: '/product',
-    component: lazy(() => import("../Pages/Products/Products")),
+    component: lazy(() => import("../Pages/Products")),
+    icon: ContactsOutlined,
+  },
+  {
+    name: 'Product Kind',
+    link: '/productkind',
+    path: '/productkind',
+    component: lazy(() => import("../Pages/ProductKind")),
     icon: ContactsOutlined,
   },
 ];

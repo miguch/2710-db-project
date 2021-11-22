@@ -32,8 +32,8 @@
       "type": "float"
     },
     "region": {
-      "model": "region",
-      "via": "sales_people"
+      "via": "sales_people",
+      "model": "region"
     },
     "store": {
       "via": "store_saleperson",
@@ -43,6 +43,10 @@
       "via": "trans_sale",
       "collection": "transaction",
       "dominant": true
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

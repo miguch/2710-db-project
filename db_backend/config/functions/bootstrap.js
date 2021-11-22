@@ -120,9 +120,9 @@ module.exports = async () => {
   if (shouldSetDefaultPermissions) {
     try {
       console.log("Setting up your starter...");
-      const files = fs.readdirSync(`./data/uploads`);
+      // const files = fs.readdirSync(`./data/uploads`);
       await setDefaultPermissions();
-      await createSeedData(files);
+      // await createSeedData(files);
       console.log("Ready to go");
     } catch (e) {
       console.log(e);

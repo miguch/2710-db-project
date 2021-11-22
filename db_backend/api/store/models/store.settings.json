@@ -8,7 +8,7 @@
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -29,8 +29,8 @@
       "unique": true
     },
     "store_saleperson": {
-      "collection": "sales-person",
-      "via": "store"
+      "via": "store",
+      "collection": "sales-person"
     },
     "region_store": {
       "model": "region"

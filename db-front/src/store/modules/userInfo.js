@@ -9,7 +9,7 @@ export const counterSlice = createSlice({
   name: 'userInfo',
   initialState: {
     userInfo: {
-      username: 'gg',
+      username: '',
       loginRequired: false
     }
   },

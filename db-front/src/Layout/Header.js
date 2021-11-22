@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { setLoginRequired } from '../store/modules/userInfo';
 import storage from '../utils/storage';
@@ -15,6 +15,7 @@ export default function Header() {
 
   const onMenuClick = ({ key }) => {
     if (key === 'info') {
+      message.info(`Email: ${userInfo.email}, type: ${userInfo.role.name}`)
     } else if (key === 'logout') {
       storage.delItem('user-token');
       dispatch(setLoginRequired(true));
@@ -30,7 +31,7 @@ export default function Header() {
 
   return (
     <div className={styles.LayoutHeader}>
-      <div className={styles.LayoutHeaderTitle}>Placeholder</div>
+      <div className={styles.LayoutHeaderTitle}>ShopPlace</div>
       <div className={styles.LayoutHeaderUser}>
         <Dropdown overlay={actions} placement="bottomCenter">
           <div>

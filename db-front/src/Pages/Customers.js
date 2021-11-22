@@ -1,9 +1,7 @@
-import tableStyles from '../../styles/table.module.less';
-import pageStyles from '../../styles/page.module.less';
 import { Table } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
-import useAntTable from '../../Hooks/Table';
-import useDataPage from '../../Hooks/DataPage';
+import useAntTable from '../Hooks/Table';
+import useDataPage from '../Hooks/DataPage';
 
 const TITLE = "Customer"
 const SCHEMA = [
@@ -28,7 +26,7 @@ const SCHEMA = [
 ];
 
 export default function Customer() {
-  const dataLoader = (async () => {}, []);
+  const dataLoader = useCallback(async () => {}, []);
   const page = useDataPage(TITLE, SCHEMA, dataLoader, {}, [
     {
       customerId: '123',

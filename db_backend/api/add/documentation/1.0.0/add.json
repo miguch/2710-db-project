@@ -537,10 +537,6 @@
           },
           "zipcode": {
             "type": "integer"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
@@ -563,10 +559,6 @@
           },
           "zipcode": {
             "type": "integer"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           },
           "created_by": {
             "type": "string"

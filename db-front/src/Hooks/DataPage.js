@@ -1,6 +1,6 @@
 import tableStyles from '../styles/table.module.less';
 import pageStyles from '../styles/page.module.less';
-import { Button, Drawer, Table, Form } from 'antd';
+import { Button, Drawer, Table, Form, message } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import useAntTable from './Table';
@@ -13,7 +13,7 @@ export default function useDataPage(
   handlers = {},
   defaultData = []
 ) {
-  const { onTableChange, pagination, loading, tableData, columns } =
+  const { onTableChange, reload, pagination, loading, tableData, columns } =
     useAntTable(dataLoader, schema, defaultData);
   const keyCol = useMemo(() => schema.find((e) => e.key)?.name, [schema]);
 
@@ -36,18 +36,22 @@ export default function useDataPage(
           if (editTarget) {
             // edit
             const res = await handlers.onEdit(editTarget, values);
-
           } else {
             // new
             const res = await handlers.onCreate(values);
-
+            antForm.resetFields();
+            setDrawerVisible(false);
+            reload();
           }
+        } catch (err) {
+          console.log(err);
+          message.error('request error');
         } finally {
           setSubmitLoading(false);
         }
       })
       .catch((errorInfo) => {});
-  }, [antForm, editTarget, handlers]);
+  }, [antForm, editTarget, handlers, reload]);
 
   return (
     <div>
@@ -65,6 +69,7 @@ export default function useDataPage(
         dataSource={tableData}
         pagination={pagination}
         onChange={onTableChange}
+        loading={loading}
         rowKey={keyCol ? keyCol : (_, index) => index}
       ></Table>
       <Drawer

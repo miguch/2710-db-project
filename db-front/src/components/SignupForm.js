@@ -38,7 +38,8 @@ export default function SignupForm({ onLogin }) {
               username: values.username,
               email: values.email,
               password: values.password,
-              confirmed: true
+              confirmed: true,
+              role: values.type
             }
           });
           storage.setItem('user-token', res.jwt);

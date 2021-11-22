@@ -8,7 +8,7 @@
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -28,12 +28,12 @@
       "type": "string"
     },
     "trans_sale": {
-      "collection": "sales-person",
-      "via": "transactions"
+      "via": "transactions",
+      "collection": "sales-person"
     },
     "tran_pd": {
-      "collection": "pd",
-      "via": "PR_tran"
+      "via": "PR_tran",
+      "collection": "pd"
     }
   }
 }
