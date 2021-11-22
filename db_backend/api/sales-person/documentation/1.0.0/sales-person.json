@@ -530,14 +530,10 @@
       "Sales-person": {
         "required": [
           "id",
-          "name",
           "store_assigned"
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "name": {
             "type": "string"
           },
           "job_title": {
@@ -711,6 +707,18 @@
               }
             }
           },
+          "street": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "integer"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -719,13 +727,9 @@
       },
       "NewSales-person": {
         "required": [
-          "name",
           "store_assigned"
         ],
         "properties": {
-          "name": {
-            "type": "string"
-          },
           "job_title": {
             "type": "string"
           },
@@ -749,6 +753,18 @@
           },
           "user": {
             "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",

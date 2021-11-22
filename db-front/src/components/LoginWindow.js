@@ -19,7 +19,7 @@ export default function LoginWindow() {
     <Modal
       visible={showLoginWindow}
       footer={null}
-      title={showSignup ? "Login" : "Register"}
+      title={!showSignup ? "Login" : "Register"}
       closable={false}
       zIndex={9999}
     >

@@ -543,14 +543,10 @@
             "items": {
               "required": [
                 "id",
-                "name",
                 "store_assigned"
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "name": {
                   "type": "string"
                 },
                 "job_title": {
@@ -576,6 +572,18 @@
                 },
                 "user": {
                   "type": "string"
+                },
+                "street": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "zipcode": {
+                  "type": "integer"
                 },
                 "published_at": {
                   "type": "string"

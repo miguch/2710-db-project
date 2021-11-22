@@ -1,4 +1,5 @@
-import { Modal, Form, Input, Button, Radio } from 'antd';
+import { Modal, Form, Input, Button, Radio, Select, InputNumber } from 'antd';
+import { Field } from 'rc-field-form';
 import { useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useNetwork from '../Hooks/Network';
@@ -31,16 +32,19 @@ export default function SignupForm({ onLogin }) {
       .then(async (values) => {
         setSignupLoading(true);
         try {
+          const requestData = {
+            ...values,
+            username: values.username,
+            email: values.email,
+            password: values.password,
+            confirmed: true,
+            role: values.type
+          };
+          delete requestData.rePassword;
           const res = await service({
             method: 'post',
             url: API.register,
-            data: {
-              username: values.username,
-              email: values.email,
-              password: values.password,
-              confirmed: true,
-              role: values.type
-            }
+            data: requestData
           });
           storage.setItem('user-token', res.jwt);
           dispatch(setUserInfo(res.user));
@@ -66,10 +70,32 @@ export default function SignupForm({ onLogin }) {
     }
   };
 
+  const [showCustomerFields, setShowCustomerFields] = useState(true);
+  const customerFields = ['marriage', 'gender', 'age', 'income', 'category'];
+  const salespersonFields = ['job_title', 'salary', 'store_assigned'];
+  const onUserTypeChange = useCallback((e) => {
+    const newType = e.target.value;
+    if (newType === 'customer') {
+      setShowCustomerFields(true);
+    } else if (newType === 'salesperson') {
+      setShowCustomerFields(false);
+    }
+  }, []);
+
+  const [showHomeCustomerFields, setShowHomeCustomerFields] = useState(true);
+  const onCustomerKindChange = useCallback((e) => {
+    const newType = e.target.value;
+    if (newType === 'home') {
+      setShowHomeCustomerFields(true);
+    } else if (newType === 'business') {
+      setShowHomeCustomerFields(false);
+    }
+  }, []);
+
   return (
-    <Form initialValues={{type: 'customer'}} form={form} {...layout}>
+    <Form initialValues={{ type: 'customer' }} form={form} {...layout}>
       <Form.Item name="type" label="Type">
-        <Radio.Group>
+        <Radio.Group onChange={onUserTypeChange}>
           <Radio.Button value="customer">Customer</Radio.Button>
           <Radio.Button value="salesperson">Salesperson</Radio.Button>
         </Radio.Group>
@@ -90,6 +116,128 @@ export default function SignupForm({ onLogin }) {
       >
         <Input.Password></Input.Password>
       </Form.Item>
+      <Form.Item label="Address" style={{ marginBottom: 0 }}>
+        <Form.Item name="street">
+          <Input placeholder="street"></Input>
+        </Form.Item>
+        <Form.Item
+          name="city"
+          style={{
+            display: 'inline-block',
+            width: 'calc(33% - 4px)',
+            marginRight: '6px'
+          }}
+        >
+          <Input placeholder="city"></Input>
+        </Form.Item>
+        <Form.Item
+          name="state"
+          style={{
+            display: 'inline-block',
+            width: 'calc(33% - 4px)',
+            marginRight: '6px'
+          }}
+        >
+          <Input placeholder="state"></Input>
+        </Form.Item>
+        <Form.Item
+          name="zipcode"
+          style={{
+            display: 'inline-block',
+            width: 'calc(33% - 4px)'
+          }}
+        >
+          <Input placeholder="zip"></Input>
+        </Form.Item>
+      </Form.Item>
+      {showCustomerFields && (
+        <>
+          <Form.Item initialValue="home" name="kind" label="Kind">
+            <Radio.Group onChange={onCustomerKindChange}>
+              <Radio.Button value="home">Home</Radio.Button>
+              <Radio.Button value="business">Business</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+          {showHomeCustomerFields && (
+            <>
+              <Form.Item label="Info" style={{ marginBottom: 0 }}>
+                <Form.Item
+                  name="marriage"
+                  style={{
+                    display: 'inline-block',
+                    width: 'calc(33% - 4px)',
+                    marginRight: '6px'
+                  }}
+                >
+                  <Select
+                    getPopupContainer={(triggerNode) =>
+                      triggerNode.parentElement
+                    }
+                    placeholder="Marriage"
+                  >
+                    <Select.Option value="Married">Married</Select.Option>
+                    <Select.Option value="Unmarried">Unmarried</Select.Option>
+                    <Select.Option value="Prefer_not_to_say">
+                      Prefer not to say
+                    </Select.Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="gender"
+                  style={{
+                    display: 'inline-block',
+                    width: 'calc(33% - 4px)',
+                    marginRight: '6px'
+                  }}
+                >
+                  <Select
+                    getPopupContainer={(triggerNode) =>
+                      triggerNode.parentElement
+                    }
+                    placeholder="gender"
+                  >
+                    <Select.Option value="Male">Male</Select.Option>
+                    <Select.Option value="Female">Female</Select.Option>
+                    <Select.Option value="Prefer_not_to_say">
+                      Prefer not to say
+                    </Select.Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="age"
+                  style={{
+                    display: 'inline-block',
+                    width: 'calc(33% - 4px)'
+                  }}
+                >
+                  <InputNumber placeholder="Age"></InputNumber>
+                </Form.Item>
+              </Form.Item>
+            </>
+          )}
+          {!showHomeCustomerFields && (
+            <Form.Item name="category" label="Category">
+              <Input placeholder="Business Category"></Input>
+            </Form.Item>
+          )}
+          <Form.Item name="income" label="Income">
+            <InputNumber></InputNumber>
+          </Form.Item>
+        </>
+      )}
+      {!showCustomerFields && (
+        <>
+          <Form.Item name="job_title" label="Job Title">
+            <Input></Input>
+          </Form.Item>
+          <Form.Item name="store_assigned" label="Store">
+            <Input></Input>
+          </Form.Item>
+          <Form.Item name="salary" label="Salary">
+            <Input></Input>
+          </Form.Item>
+        </>
+      )}
       <Form.Item {...tailLayout} style={{ marginBottom: 0 }}>
         <Button
           loading={signupLoading}

@@ -12,10 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
     "job_title": {
       "type": "string"
     },
@@ -42,6 +38,18 @@
     "user": {
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "street": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zipcode": {
+      "type": "integer"
     }
   }
 }

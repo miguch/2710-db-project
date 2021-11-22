@@ -501,6 +501,42 @@ module.exports = {
       }
 
       const user = await strapi.query('user', 'users-permissions').create(params);
+      const addressFields = ["street", "city", "state", "zipcode"];
+      if (params.type === 'customer') {
+        const newCustomer = {};
+        for (const f of addressFields) {
+          newCustomer[f] = params[f];
+        }
+        newCustomer.kind = params.kind;
+        newCustomer.user = user.id;
+        const customer = await strapi.query('customers').create(newCustomer);
+        if (newCustomer.kind === 'home') {
+          const newHomeCustomer = await strapi.query('home-customer').create({
+            marriage: params.marriage,
+            gender: params.gender,
+            age: params.age,
+            income: params.income,
+            cusomer: customer.id
+          })
+          await strapi.query('customers').
+            update({id: customer.id}, {home_customer: newHomeCustomer.id});
+        } else if (newCustomer.kind === 'business') {
+          const newBizCustomer = await strapi.query('business-customer').create({
+            category: params.category,
+            income: params.income,
+          })
+          await strapi.query('customers').
+            update({id: customer.id}, {business_customer: newBizCustomer.id});
+        }
+      } else if (params.type === 'salesperson') {
+        const newSalesperson = {}
+        const salesFields = ["job_title", "store_assigned", "salary"]
+        for (const f of [...addressFields, ...salesFields]) {
+          newSalesperson[f] = params[f];
+        }
+        newSalesperson.user = user.id;
+        await strapi.query("sales-person").create(newSalesperson)
+      }
       
       // const cus = await strapi.query('customers').create(params);
       // const sp = await strapi.query('salesperson').create(params);
@@ -526,6 +562,7 @@ module.exports = {
         user: sanitizedUser,
       });
     } catch (err) {
+      console.log(err)
       const adminError = _.includes(err.message, 'username')
         ? {
             id: 'Auth.form.error.username.taken',
