@@ -17,7 +17,7 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
       dataLoader(pagination.current, pagination.pageSize)
         .then((data) => {
           setTableData(data.data);
-          setPagination({...pagination, total: data.total})
+          setPagination({ ...pagination, total: data.total });
         })
         .finally(() => {
           setLoading(false);
@@ -27,27 +27,35 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
   );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => loadData(pagination), []);
-  const onTableChange = useCallback((newPagination, filters, sorter) => {
-    console.log(newPagination);
-    setPagination({
-      ...pagination,
-      current: newPagination.current,
-      pageSize: newPagination.pageSize
-    });
-    loadData(newPagination);
-  }, [pagination, loadData]);
+  const onTableChange = useCallback(
+    (newPagination, filters, sorter) => {
+      setPagination({
+        ...pagination,
+        current: newPagination.current,
+        pageSize: newPagination.pageSize
+      });
+      loadData(newPagination);
+    },
+    [pagination, loadData]
+  );
   const reload = useCallback(() => {
     loadData(pagination);
   }, [loadData, pagination]);
   const columns = useMemo(
-    () =>
-      schema.map((e) => ({
+    () => [
+      {
+        title: 'No.',
+        render: (_, __, index) =>
+          (pagination.current - 1) * pagination.pageSize + index
+      },
+      ...schema.map((e) => ({
         title: e.title,
         dataIndex: e.name,
         key: e.name,
         ...e
-      })),
-    [schema]
+      }))
+    ],
+    [schema, pagination]
   );
   return {
     onTableChange,

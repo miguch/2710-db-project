@@ -30,17 +30,30 @@ export default function useDataHandlers(apis) {
     }
     if (apis.create) {
       res.onCreate = async (newData) => {
-        try {
-          const res = await service({
-            method: 'post',
-            url: apis.create,
-            data: newData
-          });
-          return res;
-        } catch (err) {
-          console.log(err);
-          message.error('request error');
-        }
+        const res = await service({
+          method: 'post',
+          url: apis.create,
+          data: newData
+        });
+        return res;
+      };
+    }
+    if (apis.update) {
+      res.onEdit = async (originId, newData) => {
+        const res = await service({
+          method: 'put',
+          url: apis.update(originId),
+          data: newData
+        });
+        return res;
+      };
+    }
+    if (apis.delete) {
+      res.onDelete = async (id) => {
+        const res = await service({
+          method: 'delete',
+          url: apis.delete(id),
+        })
       };
     }
     return res;

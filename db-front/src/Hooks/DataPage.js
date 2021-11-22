@@ -1,8 +1,12 @@
 import tableStyles from '../styles/table.module.less';
 import pageStyles from '../styles/page.module.less';
-import { Button, Drawer, Table, Form, message } from 'antd';
+import { Button, Drawer, Table, Form, message, Modal } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import {
+  PlusCircleOutlined,
+  EditOutlined,
+  DeleteOutlined
+} from '@ant-design/icons';
 import useAntTable from './Table';
 import DataForm from '../components/DataForm';
 
@@ -22,10 +26,11 @@ export default function useDataPage(
   const onDrawerClose = useCallback(() => {
     setDrawerVisible(false);
   }, []);
+  const [antForm] = Form.useForm();
   const onNew = useCallback(() => {
     setDrawerVisible(true);
-  }, []);
-  const [antForm] = Form.useForm();
+    antForm.resetFields();
+  }, [antForm]);
   const [submitLoading, setSubmitLoading] = useState(false);
   const onSubmit = useCallback(() => {
     antForm
@@ -35,7 +40,10 @@ export default function useDataPage(
         try {
           if (editTarget) {
             // edit
-            const res = await handlers.onEdit(editTarget, values);
+            const keyField = schema.find((e) => e.key).name;
+            const res = await handlers.onEdit(editTarget[keyField], values);
+            setDrawerVisible(false);
+            reload();
           } else {
             // new
             const res = await handlers.onCreate(values);
@@ -51,7 +59,60 @@ export default function useDataPage(
         }
       })
       .catch((errorInfo) => {});
-  }, [antForm, editTarget, handlers, reload]);
+  }, [antForm, editTarget, handlers, reload, schema]);
+
+  const onClickUpdate = useCallback(
+    (item) => {
+      setEditTarget(item);
+      antForm.setFieldsValue({ ...item });
+      setDrawerVisible(true);
+    },
+    [antForm]
+  );
+  const onClickDelete = useCallback(
+    (item) => {
+      const modal = Modal.confirm({
+        title: 'Confirm delete',
+        content: 'Are you sure you want to delete this record?',
+        onOk() {
+          const keyField = schema.find((e) => e.key).name;
+          handlers
+            .onDelete(item[keyField])
+            .then(() => {
+              message.success('Delete Finish');
+              reload();
+            })
+            .catch((err) => {
+              console.log(err);
+              message.error('Request error');
+            });
+        }
+      });
+    },
+    [schema, handlers, reload]
+  );
+  const tableColumns = useMemo(() => {
+    const tableColumns = [...columns];
+    if (handlers.onUpdate || handlers.onDelete) {
+      tableColumns.push({
+        title: 'Modify',
+        render: (_, item) => (
+          <>
+            <Button
+              onClick={() => onClickUpdate(item)}
+              style={{ marginRight: '6px' }}
+            >
+              <EditOutlined></EditOutlined>Update
+            </Button>
+            <Button onClick={() => onClickDelete(item)} danger>
+              <DeleteOutlined></DeleteOutlined>Delete
+            </Button>
+          </>
+        )
+      });
+      return tableColumns;
+    }
+  }, [handlers, columns, onClickDelete, onClickUpdate]);
 
   return (
     <div>
@@ -65,7 +126,7 @@ export default function useDataPage(
         )}
       </div>
       <Table
-        columns={columns}
+        columns={tableColumns}
         dataSource={tableData}
         pagination={pagination}
         onChange={onTableChange}
