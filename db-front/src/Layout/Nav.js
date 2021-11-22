@@ -1,10 +1,11 @@
 import styles from './layout.module.less';
-import routes from '../Routes/router';
 import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
+import useRoutes from '../Routes/router';
 
 export default function Nav() {
   const location = useLocation();
+  const routes = useRoutes();
   return (
     <div className={styles.LayoutNav}>
       {routes.map((route) => (
