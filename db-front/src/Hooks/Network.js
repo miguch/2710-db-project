@@ -1,29 +1,38 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setLoginRequired } from '../store/modules/userInfo';
 import storage from '../utils/storage';
 
-const BASEURL = '/api'
+const BASEURL = '/api';
 
-export default function useNetwork(requireAuth=true) {
-  const [service] = useState(() => axios.create({
-    baseURL: BASEURL
-  }));
-  
-  if (requireAuth) {
-    // Auth service will send the authentication token
-    // when doing request.
-    authService.interceptors.request.use((config) => {
-      if (storage.getItem('user-token')) {
-        config.headers['Authentication'] = 'Bearer ' + storage.getItem('user-token');
-        return config;
-      } else {
-        // TODO: trigger login prompt
-        
-      }
-    }, err => {
-    
+export default function useNetwork(requireAuth = true) {
+  const dispatch = useDispatch();
+  const service = useMemo(() => {
+    const service = axios.create({
+      baseURL: BASEURL
     });
-  }
+    if (requireAuth) {
+      // Auth service will send the authentication token
+      // when doing request.
+      service.interceptors.request.use(
+        (config) => {
+          if (storage.getItem('user-token')) {
+            config.headers['Authorization'] =
+              'Bearer ' + storage.getItem('user-token');
+            return config;
+          } else {
+            dispatch(setLoginRequired(true));
+          }
+        },
+        (err) => {}
+      );
+    }
+    service.interceptors.response.use(value => {
+      return value.data;
+    })
+    return service;
+  }, [requireAuth, dispatch]);
 
   return service;
 }

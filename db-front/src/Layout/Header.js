@@ -35,7 +35,7 @@ export default function Header() {
         <Dropdown overlay={actions} placement="bottomCenter">
           <div>
             <UserOutlined className={styles.LayoutHeaderUserIcon} />
-            {userInfo.userName}
+            {userInfo.username}
           </div>
         </Dropdown>
       </div>
