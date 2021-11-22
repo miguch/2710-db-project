@@ -587,9 +587,6 @@
               "id": {
                 "type": "string"
               },
-              "Store_id": {
-                "type": "string"
-              },
               "manager": {
                 "type": "string"
               },

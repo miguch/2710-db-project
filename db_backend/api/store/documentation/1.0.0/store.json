@@ -524,9 +524,6 @@
           "id": {
             "type": "string"
           },
-          "Store_id": {
-            "type": "string"
-          },
           "manager": {
             "type": "string"
           },
@@ -635,9 +632,6 @@
           "region"
         ],
         "properties": {
-          "Store_id": {
-            "type": "string"
-          },
           "manager": {
             "type": "string"
           },

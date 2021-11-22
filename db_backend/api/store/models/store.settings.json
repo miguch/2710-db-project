@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Store_id": {
-      "type": "string"
-    },
     "manager": {
       "type": "string",
       "required": true,

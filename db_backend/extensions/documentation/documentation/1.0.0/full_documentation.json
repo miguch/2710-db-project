@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/22/2021 2:38:38 PM"
+    "x-generation-date": "11/22/2021 4:07:29 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -7757,9 +7757,6 @@
               "id": {
                 "type": "string"
               },
-              "Store_id": {
-                "type": "string"
-              },
               "manager": {
                 "type": "string"
               },
@@ -7958,9 +7955,6 @@
           "id": {
             "type": "string"
           },
-          "Store_id": {
-            "type": "string"
-          },
           "manager": {
             "type": "string"
           },
@@ -8069,9 +8063,6 @@
           "region"
         ],
         "properties": {
-          "Store_id": {
-            "type": "string"
-          },
           "manager": {
             "type": "string"
           },
