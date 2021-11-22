@@ -1,10 +1,10 @@
 import tableStyles from '../styles/table.module.less';
 import pageStyles from '../styles/page.module.less';
-import { Button, Drawer, Table } from 'antd';
+import { Button, Drawer, Table, Form } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import useAntTable from './Table';
-import Form from '../components/Form';
+import DataForm from '../components/DataForm';
 
 export default function useDataPage(
   title,
@@ -22,9 +22,32 @@ export default function useDataPage(
   const onDrawerClose = useCallback(() => {
     setDrawerVisible(false);
   }, []);
-  const onNew = () => {
+  const onNew = useCallback(() => {
     setDrawerVisible(true);
-  };
+  }, []);
+  const [antForm] = Form.useForm();
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const onSubmit = useCallback(() => {
+    antForm
+      .validateFields()
+      .then(async (values) => {
+        setSubmitLoading(true);
+        try {
+          if (editTarget) {
+            // edit
+            const res = await handlers.onEdit(editTarget, values);
+
+          } else {
+            // new
+            const res = await handlers.onCreate(values);
+
+          }
+        } finally {
+          setSubmitLoading(false);
+        }
+      })
+      .catch((errorInfo) => {});
+  }, [antForm, editTarget, handlers]);
 
   return (
     <div>
@@ -52,14 +75,19 @@ export default function useDataPage(
         width="45%"
         footer={
           <>
-            <Button type="primary" style={{ marginRight: '8px' }}>
+            <Button
+              onClick={onSubmit}
+              type="primary"
+              style={{ marginRight: '8px' }}
+              loading={submitLoading}
+            >
               Confirm
             </Button>
             <Button onClick={onDrawerClose}>Cancel</Button>
           </>
         }
       >
-        <Form formSchema={schema}></Form>
+        <DataForm form={antForm} formSchema={schema}></DataForm>
       </Drawer>
     </div>
   );

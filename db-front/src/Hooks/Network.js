@@ -2,8 +2,12 @@ import axios from 'axios';
 import { useState } from 'react';
 import storage from '../utils/storage';
 
+const BASEURL = '/api'
+
 export default function useNetwork(requireAuth=true) {
-  const [service] = useState(() => axios.create());
+  const [service] = useState(() => axios.create({
+    baseURL: BASEURL
+  }));
   
   if (requireAuth) {
     // Auth service will send the authentication token
@@ -14,6 +18,7 @@ export default function useNetwork(requireAuth=true) {
         return config;
       } else {
         // TODO: trigger login prompt
+        
       }
     }, err => {
     

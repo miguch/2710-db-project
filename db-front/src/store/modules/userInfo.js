@@ -5,15 +5,21 @@ export const counterSlice = createSlice({
   name: 'userInfo',
   initialState: {
     userInfo: {
-      userName: 'gg'
+      userName: 'gg',
+      loginRequired: false,
     }
   },
   reducers: {
-
+    setUserInfo(state, action) {
+      state.userInfo = actions.payload;
+    },
+    setLoginRequired(state, action) {
+      state.userInfo.loginRequired = action.payload;
+    }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const {  } = counterSlice.actions;
+export const { setUserInfo, setLoginRequired } = counterSlice.actions;
 
 export default counterSlice.reducer;
