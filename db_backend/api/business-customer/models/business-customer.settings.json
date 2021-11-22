@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "business_customers",
+  "info": {
+    "name": "BusinessCustomer",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "category": {
+      "type": "string"
+    },
+    "income": {
+      "type": "integer"
+    },
+    "customer": {
+      "model": "customers",
+      "via": "business_customer"
+    }
+  }
+}

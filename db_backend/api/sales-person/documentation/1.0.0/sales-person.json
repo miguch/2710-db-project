@@ -530,15 +530,11 @@
       "Sales-person": {
         "required": [
           "id",
-          "sp_id",
           "name",
           "store_assigned"
         ],
         "properties": {
           "id": {
-            "type": "string"
-          },
-          "sp_id": {
             "type": "string"
           },
           "name": {
@@ -723,14 +719,10 @@
       },
       "NewSales-person": {
         "required": [
-          "sp_id",
           "name",
           "store_assigned"
         ],
         "properties": {
-          "sp_id": {
-            "type": "string"
-          },
           "name": {
             "type": "string"
           },

@@ -12,41 +12,39 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "customer_id": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "marriage": {
-      "type": "enumeration",
-      "enum": [
-        "married",
-        "unmarried"
-      ]
-    },
-    "gender": {
-      "type": "enumeration",
-      "enum": [
-        "Man",
-        "Woman"
-      ]
-    },
-    "Age": {
-      "type": "integer"
-    },
-    "income": {
-      "type": "float"
-    },
     "cus_tran": {
       "collection": "transaction"
     },
     "user": {
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "street": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "zipcode": {
+      "type": "integer"
+    },
+    "kind": {
+      "type": "enumeration",
+      "enum": [
+        "home",
+        "business"
+      ]
+    },
+    "business_customer": {
+      "via": "customer",
+      "model": "business-customer"
+    },
+    "home_customer": {
+      "via": "customer",
+      "model": "home-customer"
     }
   }
 }

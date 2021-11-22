@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "pd_id": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "name": {
       "type": "string",
       "required": true
@@ -27,7 +22,7 @@
       "required": true
     },
     "price": {
-      "type": "integer",
+      "type": "decimal",
       "default": 0,
       "required": true
     },

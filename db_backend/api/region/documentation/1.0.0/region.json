@@ -537,15 +537,11 @@
             "items": {
               "required": [
                 "id",
-                "sp_id",
                 "name",
                 "store_assigned"
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "sp_id": {
                   "type": "string"
                 },
                 "name": {

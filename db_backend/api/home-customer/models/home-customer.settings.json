@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "home_customers",
+  "info": {
+    "name": "HomeCustomer",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "marriage": {
+      "type": "enumeration",
+      "enum": [
+        "Married",
+        "Unmarried",
+        "Prefer_not_to_say"
+      ]
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "Male",
+        "Female",
+        "Prefer_not_to_say"
+      ]
+    },
+    "age": {
+      "type": "integer"
+    },
+    "income": {
+      "type": "integer"
+    },
+    "customer": {
+      "model": "customers",
+      "via": "home_customer"
+    }
+  }
+}

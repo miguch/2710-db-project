@@ -543,15 +543,11 @@
             "items": {
               "required": [
                 "id",
-                "sp_id",
                 "name",
                 "store_assigned"
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "sp_id": {
                   "type": "string"
                 },
                 "name": {
@@ -598,16 +594,12 @@
             "items": {
               "required": [
                 "id",
-                "pd_id",
                 "name",
                 "amount",
                 "price"
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "pd_id": {
                   "type": "string"
                 },
                 "name": {
@@ -617,7 +609,7 @@
                   "type": "integer"
                 },
                 "price": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "description": {
                   "type": "string"

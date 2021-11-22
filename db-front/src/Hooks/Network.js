@@ -28,9 +28,18 @@ export default function useNetwork(requireAuth = true) {
         (err) => {}
       );
     }
-    service.interceptors.response.use(value => {
-      return value.data;
-    })
+    service.interceptors.response.use(
+      (value) => {
+        return value.data;
+      },
+      (err) => {
+        if (err?.response?.status === 401) {
+          dispatch(setLoginRequired(true));
+        }
+        throw err;
+        // return err
+      }
+    );
     return service;
   }, [requireAuth, dispatch]);
 

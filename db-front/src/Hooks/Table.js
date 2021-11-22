@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export default function useAntTable(dataLoader, schema, defaultData = []) {
@@ -18,6 +19,9 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
         .then((data) => {
           setTableData(data.data);
           setPagination({ ...pagination, total: data.total });
+        })
+        .catch((err) => {
+          message.error('request error');
         })
         .finally(() => {
           setLoading(false);
@@ -52,6 +56,9 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
         title: e.title,
         dataIndex: e.name,
         key: e.name,
+        ...(e.relationField
+          ? { render: (_, item) => item[e.name][e.relationField] }
+          : {}),
         ...e
       }))
     ],

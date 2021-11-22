@@ -21,6 +21,7 @@ export default function LoginWindow() {
       footer={null}
       title={showSignup ? "Login" : "Register"}
       closable={false}
+      zIndex={9999}
     >
       {showSignup ? (
         <SignupForm onLogin={() => {setShowSignup(false)}}></SignupForm>

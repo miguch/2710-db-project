@@ -64,10 +64,16 @@ export default function useDataPage(
   const onClickUpdate = useCallback(
     (item) => {
       setEditTarget(item);
-      antForm.setFieldsValue({ ...item });
+      const formValues = { ...item };
+      for (const field of schema) {
+        if (field.relationApi) {
+          formValues[field.name] = formValues[field.name].id;
+        }
+      }
+      antForm.setFieldsValue(formValues);
       setDrawerVisible(true);
     },
-    [antForm]
+    [antForm, schema]
   );
   const onClickDelete = useCallback(
     (item) => {
@@ -110,8 +116,8 @@ export default function useDataPage(
           </>
         )
       });
-      return tableColumns;
     }
+    return tableColumns;
   }, [handlers, columns, onClickDelete, onClickUpdate]);
 
   return (

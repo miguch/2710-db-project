@@ -516,39 +516,11 @@
     "schemas": {
       "Customers": {
         "required": [
-          "id",
-          "customer_id",
-          "name"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
-          },
-          "customer_id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "marriage": {
-            "type": "string",
-            "enum": [
-              "married",
-              "unmarried"
-            ]
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "Man",
-              "Woman"
-            ]
-          },
-          "Age": {
-            "type": "integer"
-          },
-          "income": {
-            "type": "number"
           },
           "cus_tran": {
             "type": "array",
@@ -640,41 +612,102 @@
                 "type": "string"
               }
             }
+          },
+          "street": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "home",
+              "business"
+            ]
+          },
+          "business_customer": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "income": {
+                "type": "integer"
+              },
+              "customer": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "home_customer": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "marriage": {
+                "type": "string",
+                "enum": [
+                  "Married",
+                  "Unmarried",
+                  "Prefer_not_to_say"
+                ]
+              },
+              "gender": {
+                "type": "string",
+                "enum": [
+                  "Male",
+                  "Female",
+                  "Prefer_not_to_say"
+                ]
+              },
+              "age": {
+                "type": "integer"
+              },
+              "income": {
+                "type": "integer"
+              },
+              "customer": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
       "NewCustomers": {
-        "required": [
-          "customer_id",
-          "name"
-        ],
         "properties": {
-          "customer_id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "marriage": {
-            "type": "string",
-            "enum": [
-              "married",
-              "unmarried"
-            ]
-          },
-          "gender": {
-            "type": "string",
-            "enum": [
-              "Man",
-              "Woman"
-            ]
-          },
-          "Age": {
-            "type": "integer"
-          },
-          "income": {
-            "type": "number"
-          },
           "cus_tran": {
             "type": "array",
             "items": {
@@ -682,6 +715,31 @@
             }
           },
           "user": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "home",
+              "business"
+            ]
+          },
+          "business_customer": {
+            "type": "string"
+          },
+          "home_customer": {
             "type": "string"
           },
           "created_by": {

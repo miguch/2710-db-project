@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/pds": {
+    "/business-customers": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -10,9 +10,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Pd"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -51,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Pd"
+          "Business-customer"
         ],
         "parameters": [
           {
@@ -201,72 +202,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pd"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Pd"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPd"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pds/count": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "foo": {
+                      "type": "string"
                     }
                   }
                 }
@@ -306,12 +244,22 @@
         },
         "summary": "",
         "tags": [
-          "Pd"
+          "Business-customer"
         ],
-        "parameters": []
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBusiness-customer"
+              }
+            }
+          }
+        }
       }
     },
-    "/pds/{id}": {
+    "/business-customers/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +269,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pd"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -359,7 +311,64 @@
         },
         "summary": "",
         "tags": [
-          "Pd"
+          "Business-customer"
+        ],
+        "parameters": []
+      }
+    },
+    "/business-customers/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Business-customer"
         ],
         "parameters": [
           {
@@ -383,7 +392,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pd"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -421,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Pd"
+          "Business-customer"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPd"
+                "$ref": "#/components/schemas/NewBusiness-customer"
               }
             }
           }
@@ -495,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Pd"
+          "Business-customer"
         ],
         "parameters": [
           {
@@ -514,78 +527,21 @@
   },
   "components": {
     "schemas": {
-      "Pd": {
+      "Business-customer": {
         "required": [
-          "id",
-          "name",
-          "amount",
-          "price"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
+          "category": {
             "type": "string"
           },
-          "amount": {
-            "type": "integer",
-            "default": 0
+          "income": {
+            "type": "integer"
           },
-          "price": {
-            "type": "number",
-            "default": 0
-          },
-          "description": {
-            "type": "string"
-          },
-          "PR_tran": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "order_number": {
-                  "type": "string"
-                },
-                "sale_date": {
-                  "type": "string"
-                },
-                "saleperson": {
-                  "type": "string"
-                },
-                "product_id": {
-                  "type": "string"
-                },
-                "cust_id": {
-                  "type": "string"
-                },
-                "trans_sale": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "tran_pd": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "product_type": {
+          "customer": {
             "required": [
               "id"
             ],
@@ -593,14 +549,39 @@
               "id": {
                 "type": "string"
               },
-              "name": {
-                "type": "string"
-              },
-              "pds": {
+              "cus_tran": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "user": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "integer"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "home",
+                  "business"
+                ]
+              },
+              "business_customer": {
+                "type": "string"
+              },
+              "home_customer": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -609,38 +590,27 @@
                 "type": "string"
               }
             }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewPd": {
-        "required": [
-          "name",
-          "amount",
-          "price"
-        ],
+      "NewBusiness-customer": {
         "properties": {
-          "name": {
+          "category": {
             "type": "string"
           },
-          "amount": {
-            "type": "integer",
-            "default": 0
+          "income": {
+            "type": "integer"
           },
-          "price": {
-            "type": "number",
-            "default": 0
-          },
-          "description": {
+          "customer": {
             "type": "string"
           },
-          "PR_tran": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "product_type": {
-            "type": "string"
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -652,9 +622,5 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Pd"
-    }
-  ]
+  "tags": []
 }
