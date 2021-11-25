@@ -545,7 +545,7 @@
           "salary": {
             "type": "number"
           },
-          "region": {
+          "store": {
             "required": [
               "id"
             ],
@@ -553,44 +553,8 @@
               "id": {
                 "type": "string"
               },
-              "region_name": {
-                "type": "string"
-              },
-              "region_manager": {
-                "type": "string"
-              },
-              "sales_people": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "store": {
-            "required": [
-              "id",
-              "manager",
-              "region"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "manager": {
-                "type": "string"
-              },
               "num_salesperson": {
                 "type": "integer"
-              },
-              "region": {
-                "type": "string"
               },
               "store_saleperson": {
                 "type": "array",
@@ -598,7 +562,10 @@
                   "type": "string"
                 }
               },
-              "region_store": {
+              "region": {
+                "type": "string"
+              },
+              "manager": {
                 "type": "string"
               },
               "created_by": {
@@ -691,6 +658,12 @@
                 "customer": {
                   "type": "string"
                 },
+                "price": {
+                  "type": "number"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -719,9 +692,6 @@
           },
           "salary": {
             "type": "number"
-          },
-          "region": {
-            "type": "string"
           },
           "store": {
             "type": "string"

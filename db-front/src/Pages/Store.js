@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useAntTable from '../Hooks/Table';
 import useDataPage from '../Hooks/DataPage';
 import useDataHandlers from '../Hooks/Data';
+import useNetwork from '../Hooks/Network';
 
 const TITLE = 'Store';
 const SCHEMA = [
@@ -14,7 +15,11 @@ const SCHEMA = [
   },
   {
     title: 'Manager',
-    name: 'manager'
+    name: 'manager',
+    relationApi: '/sales-people',
+    relationField: 'user.username',
+    tableRenderField: 'managerName',
+    type: 'select'
   },
   {
     title: 'Salespersons',
@@ -22,7 +27,10 @@ const SCHEMA = [
   },
   {
     title: 'Region',
-    name: 'region'
+    name: 'region',
+    relationApi: '/regions',
+    relationField: 'region_name',
+    type: 'select'
   }
 ];
 
@@ -36,6 +44,23 @@ const API = {
 
 export default function Stores() {
   const handlers = useDataHandlers(API);
+  const service = useNetwork();
+  const defaultLoader = handlers.dataLoader;
+  handlers.dataLoader = async (current, pageSize) => {
+    const result = await defaultLoader(current, pageSize);
+    await Promise.all(
+      result.data.map(async (e) => {
+        if (e.manager?.user) {
+          const userInfo = await service({
+            url: '/users/' + e.manager.user,
+            method: 'get'
+          });
+          e.manager.managerName = userInfo.username;
+        }
+      })
+    );
+    return result;
+  };
 
   const page = useDataPage(TITLE, SCHEMA, handlers.dataLoader, handlers, []);
   return page;

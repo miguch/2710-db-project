@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/aggregation/saleProfit",
+      "handler": "aggregation.saleProfit",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

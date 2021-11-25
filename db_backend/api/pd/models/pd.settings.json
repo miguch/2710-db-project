@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "pds",
   "info": {
-    "name": "PD",
+    "name": "Product",
     "description": ""
   },
   "options": {

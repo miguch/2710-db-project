@@ -526,56 +526,81 @@
             "type": "string"
           },
           "region_manager": {
-            "type": "string"
+            "required": [
+              "id",
+              "store_assigned"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "job_title": {
+                "type": "string"
+              },
+              "store_assigned": {
+                "type": "string"
+              },
+              "salary": {
+                "type": "number"
+              },
+              "store": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "integer"
+              },
+              "transactions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           },
-          "sales_people": {
+          "stores": {
             "type": "array",
             "items": {
               "required": [
-                "id",
-                "store_assigned"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "job_title": {
-                  "type": "string"
+                "num_salesperson": {
+                  "type": "integer"
                 },
-                "store_assigned": {
-                  "type": "string"
-                },
-                "salary": {
-                  "type": "number"
-                },
-                "region": {
-                  "type": "string"
-                },
-                "store": {
-                  "type": "string"
-                },
-                "transactions": {
+                "store_saleperson": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "user": {
+                "region": {
                   "type": "string"
                 },
-                "street": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "state": {
-                  "type": "string"
-                },
-                "zipcode": {
-                  "type": "integer"
-                },
-                "published_at": {
+                "manager": {
                   "type": "string"
                 },
                 "created_by": {
@@ -597,7 +622,7 @@
           "region_manager": {
             "type": "string"
           },
-          "sales_people": {
+          "stores": {
             "type": "array",
             "items": {
               "type": "string"

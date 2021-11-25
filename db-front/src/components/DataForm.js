@@ -1,6 +1,7 @@
 import { Form, Input, InputNumber, Select } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 import useNetwork from '../Hooks/Network';
+import _ from 'lodash';
 
 const formItemLayout = {
   labelCol: { span: 4 },
@@ -31,8 +32,8 @@ export default function DataForm({ formSchema, form }) {
       <Select>
         {relationMappings[field.name] &&
           relationMappings[field.name].map((option) => (
-            <Select.Option value={option.id}>
-              {option[field.relationField]}
+            <Select.Option value={option.id} key={option.id}>
+              {_.get(option, field.relationField)}
             </Select.Option>
           ))}
       </Select>

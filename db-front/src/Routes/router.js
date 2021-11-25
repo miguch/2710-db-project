@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { DashboardFilled } from '@ant-design/icons';
+import { DashboardFilled, ShoppingCartOutlined } from '@ant-design/icons';
 import { ContactsOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 
@@ -70,8 +70,8 @@ const STATIC_ROUTES = [
     path: '/purchase',
     component: lazy(() => import('../Pages/Purchase')),
     filterRole: ['customer'],
-    icon: ContactsOutlined
-  }
+    icon: ShoppingCartOutlined
+  },
 ];
 
 export default function useRoutes() {

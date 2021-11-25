@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/pds/purchase",
+      "handler": "pd.purchase",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/pds/:id",
       "handler": "pd.update",

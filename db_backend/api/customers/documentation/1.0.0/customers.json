@@ -547,6 +547,12 @@
                 "customer": {
                   "type": "string"
                 },
+                "price": {
+                  "type": "number"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -716,6 +722,12 @@
                 },
                 "customer": {
                   "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "quantity": {
+                  "type": "integer"
                 },
                 "created_by": {
                   "type": "string"

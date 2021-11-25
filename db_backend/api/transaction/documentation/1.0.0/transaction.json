@@ -544,9 +544,6 @@
               "salary": {
                 "type": "number"
               },
-              "region": {
-                "type": "string"
-              },
               "store": {
                 "type": "string"
               },
@@ -680,6 +677,12 @@
                 "type": "string"
               }
             }
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer"
           }
         }
       },
@@ -700,6 +703,12 @@
           },
           "customer": {
             "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "quantity": {
+            "type": "integer"
           },
           "created_by": {
             "type": "string"

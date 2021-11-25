@@ -22,10 +22,6 @@
     "salary": {
       "type": "float"
     },
-    "region": {
-      "via": "sales_people",
-      "model": "region"
-    },
     "store": {
       "via": "store_saleperson",
       "model": "store"

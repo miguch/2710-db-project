@@ -16,11 +16,11 @@
       "type": "string"
     },
     "region_manager": {
-      "type": "string"
+      "model": "sales-person"
     },
-    "sales_people": {
+    "stores": {
       "via": "region",
-      "collection": "sales-person"
+      "collection": "store"
     }
   }
 }

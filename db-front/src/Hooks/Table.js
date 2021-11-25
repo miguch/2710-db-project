@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import _ from 'lodash';
 
 export default function useAntTable(dataLoader, schema, defaultData = []) {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
           setPagination({ ...pagination, total: data.total });
         })
         .catch((err) => {
+          console.log(err);
           message.error('request error');
         })
         .finally(() => {
@@ -57,7 +59,10 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
         dataIndex: e.name,
         key: e.name,
         ...(e.relationField
-          ? { render: (_, item) => item[e.name][e.relationField] }
+          ? {
+              render: (val, item) =>
+                _.get(item[e.name], e.tableRenderField || e.relationField)
+            }
           : {}),
         ...e
       }))

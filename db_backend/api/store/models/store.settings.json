@@ -12,25 +12,19 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "manager": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "num_salesperson": {
       "type": "integer"
-    },
-    "region": {
-      "type": "string",
-      "required": true,
-      "unique": true
     },
     "store_saleperson": {
       "via": "store",
       "collection": "sales-person"
     },
-    "region_store": {
-      "model": "region"
+    "region": {
+      "model": "region",
+      "via": "stores"
+    },
+    "manager": {
+      "model": "sales-person"
     }
   }
 }

@@ -39,7 +39,7 @@ const SCHEMA = [
   }
 ];
 
-const apiName = 'pds';
+const apiName = 'products';
 const API = {
   get: `/${apiName}`,
   create: `/${apiName}`,

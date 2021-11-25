@@ -20,12 +20,18 @@
       "via": "transactions"
     },
     "products": {
-      "collection": "pd",
-      "via": "PR_tran"
+      "via": "PR_tran",
+      "collection": "pd"
     },
     "customer": {
       "model": "customers",
       "via": "transactions"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "quantity": {
+      "type": "integer"
     }
   }
 }
