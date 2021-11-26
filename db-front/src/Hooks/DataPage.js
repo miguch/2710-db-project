@@ -15,7 +15,8 @@ export default function useDataPage(
   schema,
   dataLoader,
   handlers = {},
-  defaultData = []
+  defaultData = [],
+  customAction = null
 ) {
   const { onTableChange, reload, pagination, loading, tableData, columns } =
     useAntTable(dataLoader, schema, defaultData);
@@ -120,6 +121,8 @@ export default function useDataPage(
     return tableColumns;
   }, [handlers, columns, onClickDelete, onClickUpdate]);
 
+  handlers.onReload(reload);
+
   return (
     <div>
       <div className={pageStyles.PageTitle}>
@@ -130,6 +133,7 @@ export default function useDataPage(
             New {title}
           </Button>
         )}
+        {customAction && customAction()}
       </div>
       <Table
         columns={tableColumns}

@@ -1,10 +1,11 @@
 import { message } from 'antd';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import useNetwork from '../Hooks/Network';
 import querystring from 'querystring';
 
 export default function useDataHandlers(apis) {
   const service = useNetwork();
+  let reloadFunc = useRef(null);
   const res = useMemo(() => {
     const res = {};
     if (apis.get) {
@@ -27,6 +28,12 @@ export default function useDataHandlers(apis) {
           message.error('request error');
         }
       };
+      res.onReload = (func) => {
+        reloadFunc.current = func;
+      };
+      res.doReload = () => {
+        reloadFunc.current && reloadFunc.current();
+      }
     }
     if (apis.create) {
       res.onCreate = async (newData) => {
@@ -52,11 +59,11 @@ export default function useDataHandlers(apis) {
       res.onDelete = async (id) => {
         const res = await service({
           method: 'delete',
-          url: apis.delete(id),
-        })
+          url: apis.delete(id)
+        });
       };
     }
     return res;
-  }, [apis, service]);
+  }, [apis, service, reloadFunc]);
   return res;
 }

@@ -1,4 +1,5 @@
 "use strict";
+const { sanitizeEntity } = require("strapi-utils");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -6,6 +7,51 @@
  */
 
 module.exports = {
+  async find(ctx) {
+    let entities;
+    const query = ctx.query;
+    console.log(query)
+    if (ctx.state.user && ctx.state.user.role.name === "customer") {
+      const customer_info = await strapi.services.customers.findOne({
+        user: ctx.state.user.id,
+      });
+      if (!customer_info) {
+        ctx.response.badRequest("Customer information not found");
+        return;
+      }
+      query['customer'] = customer_info.id
+    } else if (ctx.state.user && ctx.state.user.role.name === "salesperson") {
+      const salse_info = await strapi.services["sales-person"].findOne({
+        user: ctx.state.user.id,
+      });
+      if (!salse_info) {
+        ctx.response.badRequest("Customer information not found");
+        return;
+      }
+      query['salesperson'] = salse_info.id
+    }
+    if (ctx.query._q) {
+      entities = await strapi.services.transaction.search(query);
+    } else {
+      entities = await strapi.services.transaction.find(query);
+    }
+    for (const item of entities) {
+      if (item.salesperson) {
+        item.salesperson_user = await strapi.services["sales-person"].findOne({
+          id: item.salesperson.id,
+        });
+      }
+      if (item.customer) {
+        item.customer_user = await strapi.services["customers"].findOne({
+          id: item.customer.id,
+        });
+      }
+    }
+
+    return entities.map((entity) =>
+      sanitizeEntity(entity, { model: strapi.models.transaction })
+    );
+  },
   async purchase(ctx) {
     const customer_info = await strapi.services.customers.findOne({
       user: ctx.state.user.id,

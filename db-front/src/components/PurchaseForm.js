@@ -1,8 +1,14 @@
-import { Modal, Form, Button, InputNumber, Select, message } from 'antd';
+import { Modal, Form, Button, InputNumber, Select, message, List } from 'antd';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import useNetwork from '../Hooks/Network';
 
-export default function PurchaseForm({ visible, purchaseTarget, onClose }) {
+const API = '/transactions/do';
+
+export default function PurchaseForm({
+  selectedProducts,
+  onClose,
+  onComplete
+}) {
   const [form] = Form.useForm();
   const service = useNetwork();
   useEffect(() => {
@@ -10,7 +16,7 @@ export default function PurchaseForm({ visible, purchaseTarget, onClose }) {
       quantity: 1,
       salesperson: null
     });
-  }, [purchaseTarget, form]);
+  }, [selectedProducts, form]);
   const [submitting, setSubmitting] = useState(false);
   const onSubmit = useCallback(() => {
     form.validateFields().then(async (values) => {
@@ -18,19 +24,44 @@ export default function PurchaseForm({ visible, purchaseTarget, onClose }) {
         setSubmitting(true);
         values = {
           ...values,
-          price: purchaseTarget.price
+          products: Object.keys(selectedProducts).map((id) => ({
+            id: selectedProducts[id].product.id,
+            amount: selectedProducts[id].quantity
+          }))
         };
+        const res = await service({
+          method: 'POST',
+          url: API,
+          data: values,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (res.success) {
+          message.success("Order placed!")
+          onComplete();
+        } else {
+          message.warn(res.msg);
+        }
+      } catch (err) {
+        console.log(err);
+        message.error("request error");
       } finally {
         setSubmitting(false);
       }
     });
-  }, [purchaseTarget, form]);
-  const [priceSum, setPriceSum] = useState(0);
-  useEffect(() => {
-    if (purchaseTarget) {
-      setPriceSum(purchaseTarget.price);
-    }
-  }, [purchaseTarget]);
+  }, [selectedProducts, form, onComplete, service]);
+  const priceSum = useMemo(
+    () =>
+      Object.keys(selectedProducts).reduce(
+        (sum, currProd) =>
+          sum +
+          selectedProducts[currProd].product.price *
+            selectedProducts[currProd].quantity,
+        0
+      ),
+    [selectedProducts]
+  );
   const [salespeople, setSalespeople] = useState([]);
   useEffect(() => {
     const API = '/sales-people';
@@ -55,56 +86,70 @@ export default function PurchaseForm({ visible, purchaseTarget, onClose }) {
     wrapperCol: { offset: 6, span: 18 }
   };
   return (
-    <Modal title="Purchase" footer={null} onCancel={onClose} visible={visible}>
-      <Form form={form} {...layout}>
-        {purchaseTarget && (
-          <>
-            <Form.Item label="Product">
-              <div>{purchaseTarget.name}</div>
-            </Form.Item>
-            <Form.Item label="Price">
-              <div>${purchaseTarget.price}</div>
-            </Form.Item>
-            <Form.Item
-              rules={[{ required: true }]}
-              name="quantity"
-              label="Quantity"
+    <Form form={form} {...layout}>
+      {selectedProducts && (
+        <>
+          <Form.Item
+            rules={[{ required: true }]}
+            name="salesPerson"
+            label="Salesperson"
+          >
+            <Select>
+              {salespeople.map((person) => (
+                <Select.Option key={person.id} value={person.id}>
+                  {person.user.username}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item label="Product List">
+            <List
+              size="small"
+              dataSource={Object.keys(selectedProducts)}
+              bordered
+              renderItem={(id) => (
+                <List.Item>
+                  {selectedProducts[id].product.name}
+                  <div style={{ float: 'right' }}>
+                    <span style={{ marginRight: 6 }}>
+                      ${selectedProducts[id].product.price} x
+                      {selectedProducts[id].quantity}
+                    </span>
+                    <span
+                      style={{
+                        minWidth: 50,
+                        display: 'inline-block',
+                        textAlign: 'right'
+                      }}
+                    >
+                      $
+                      {selectedProducts[id].product.price *
+                        selectedProducts[id].quantity}
+                    </span>
+                  </div>
+                </List.Item>
+              )}
+            ></List>
+          </Form.Item>
+          <Form.Item label="Total Price">
+            <div>${priceSum}</div>
+          </Form.Item>
+          <Form.Item {...tailLayout}>
+            <Button
+              loading={submitting}
+              htmlType="submit"
+              type="primary"
+              onClick={onSubmit}
+              style={{ marginRight: 12 }}
             >
-              <InputNumber
-                min={1}
-                parser={(numStr) => parseInt(numStr)}
-                onChange={(e) =>
-                  setPriceSum(e === null ? 0 : e * purchaseTarget.price)
-                }
-              ></InputNumber>
-            </Form.Item>
-            <Form.Item label="Total Price">
-              <div>${priceSum}</div>
-            </Form.Item>
-            <Form.Item name="salesperson" label="Salesperson">
-              <Select>
-                {salespeople.map((person) => (
-                  <Select.Option value={person.user.username}>{}</Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item {...tailLayout}>
-              <Button
-                loading={submitting}
-                htmlType="submit"
-                type="primary"
-                onClick={onSubmit}
-                style={{ marginRight: 12 }}
-              >
-                Confirm
-              </Button>
-              <Button htmlType="button" onClick={onClose}>
-                Cancel
-              </Button>
-            </Form.Item>
-          </>
-        )}
-      </Form>
-    </Modal>
+              Confirm
+            </Button>
+            <Button htmlType="button" onClick={onClose}>
+              Cancel
+            </Button>
+          </Form.Item>
+        </>
+      )}
+    </Form>
   );
 }
