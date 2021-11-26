@@ -10,7 +10,7 @@ module.exports = {
   async find(ctx) {
     let entities;
     const query = ctx.query;
-    console.log(query)
+    console.log(query);
     if (ctx.state.user && ctx.state.user.role.name === "customer") {
       const customer_info = await strapi.services.customers.findOne({
         user: ctx.state.user.id,
@@ -19,7 +19,7 @@ module.exports = {
         ctx.response.badRequest("Customer information not found");
         return;
       }
-      query['customer'] = customer_info.id
+      query["customer"] = customer_info.id;
     } else if (ctx.state.user && ctx.state.user.role.name === "salesperson") {
       const salse_info = await strapi.services["sales-person"].findOne({
         user: ctx.state.user.id,
@@ -28,25 +28,32 @@ module.exports = {
         ctx.response.badRequest("Customer information not found");
         return;
       }
-      query['salesperson'] = salse_info.id
+      query["salesperson"] = salse_info.id;
     }
     if (ctx.query._q) {
       entities = await strapi.services.transaction.search(query);
     } else {
       entities = await strapi.services.transaction.find(query);
     }
-    for (const item of entities) {
-      if (item.salesperson) {
-        item.salesperson_user = await strapi.services["sales-person"].findOne({
-          id: item.salesperson.id,
-        });
-      }
-      if (item.customer) {
-        item.customer_user = await strapi.services["customers"].findOne({
-          id: item.customer.id,
-        });
-      }
-    }
+    await Promise.all(
+      entities.map(async (item) => {
+        if (item.salesperson) {
+          item.salesperson_user = await strapi.services["sales-person"].findOne(
+            item.salesperson.id
+          );
+        }
+        if (item.customer) {
+          item.customer_user = await strapi.services["customers"].findOne(
+            item.customer.id
+          );
+        }
+        await Promise.all(
+          item.product_transactions.map(async (pt) => {
+            pt.product = await strapi.services.product.findOne(pt.product);
+          })
+        );
+      })
+    );
 
     return entities.map((entity) =>
       sanitizeEntity(entity, { model: strapi.models.transaction })
@@ -76,7 +83,7 @@ module.exports = {
         .raw(
           `SELECT id, name, amount as inventory, price FROM products WHERE id in (${products
             .map((e) => "?")
-            .join(",")})`,
+            .join(",")}) FOR UPDATE;`,
           products.map((e) => e.id)
         )
         .transacting(trx);
