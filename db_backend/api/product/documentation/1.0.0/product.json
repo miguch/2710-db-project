@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/regions": {
+    "/products": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Region"
+                    "$ref": "#/components/schemas/Product"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Region"
+          "Product"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Region"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Region"
+          "Product"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewRegion"
+                "$ref": "#/components/schemas/NewProduct"
               }
             }
           }
         }
       }
     },
-    "/regions/count": {
+    "/products/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Region"
+          "Product"
         ],
         "parameters": []
       }
     },
-    "/regions/{id}": {
+    "/products/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Region"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Region"
+          "Product"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Region"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Region"
+          "Product"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewRegion"
+                "$ref": "#/components/schemas/NewProduct"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Region"
+          "Product"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Region": {
+      "Product": {
         "required": [
           "id"
         ],
@@ -522,10 +522,19 @@
           "id": {
             "type": "string"
           },
-          "region_name": {
+          "name": {
             "type": "string"
           },
-          "region_manager": {
+          "amount": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "product_type": {
             "required": [
               "id"
             ],
@@ -533,38 +542,14 @@
               "id": {
                 "type": "string"
               },
-              "job_title": {
+              "name": {
                 "type": "string"
               },
-              "salary": {
-                "type": "number"
-              },
-              "store": {
-                "type": "string"
-              },
-              "user": {
-                "type": "string"
-              },
-              "street": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "state": {
-                "type": "string"
-              },
-              "zipcode": {
-                "type": "integer"
-              },
-              "transactions": {
+              "products": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
-              },
-              "published_at": {
-                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -574,7 +559,7 @@
               }
             }
           },
-          "stores": {
+          "product_transactions": {
             "type": "array",
             "items": {
               "required": [
@@ -584,19 +569,19 @@
                 "id": {
                   "type": "string"
                 },
-                "num_salesperson": {
-                  "type": "integer"
-                },
-                "store_saleperson": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "region": {
+                "transaction": {
                   "type": "string"
                 },
-                "manager": {
+                "product": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "published_at": {
                   "type": "string"
                 },
                 "created_by": {
@@ -607,22 +592,39 @@
                 }
               }
             }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
-      "NewRegion": {
+      "NewProduct": {
         "properties": {
-          "region_name": {
+          "name": {
             "type": "string"
           },
-          "region_manager": {
+          "amount": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "number"
+          },
+          "description": {
             "type": "string"
           },
-          "stores": {
+          "product_type": {
+            "type": "string"
+          },
+          "product_transactions": {
             "type": "array",
             "items": {
               "type": "string"
             }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -636,7 +638,7 @@
   },
   "tags": [
     {
-      "name": "Region"
+      "name": "Product"
     }
   ]
 }

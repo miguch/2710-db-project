@@ -522,46 +522,6 @@
           "id": {
             "type": "string"
           },
-          "cus_tran": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "sale_date": {
-                  "type": "string"
-                },
-                "salesperson": {
-                  "type": "string"
-                },
-                "products": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "customer": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "quantity": {
-                  "type": "integer"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "user": {
             "required": [
               "id",
@@ -714,20 +674,14 @@
                 "salesperson": {
                   "type": "string"
                 },
-                "products": {
+                "customer": {
+                  "type": "string"
+                },
+                "product_transactions": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "customer": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "quantity": {
-                  "type": "integer"
                 },
                 "created_by": {
                   "type": "string"
@@ -742,12 +696,6 @@
       },
       "NewCustomers": {
         "properties": {
-          "cus_tran": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "user": {
             "type": "string"
           },

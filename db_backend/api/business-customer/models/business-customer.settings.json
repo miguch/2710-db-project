@@ -19,8 +19,8 @@
       "type": "integer"
     },
     "customer": {
-      "model": "customers",
-      "via": "business_customer"
+      "via": "business_customer",
+      "model": "customers"
     }
   }
 }

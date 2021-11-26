@@ -549,12 +549,6 @@
               "id": {
                 "type": "string"
               },
-              "cus_tran": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "user": {
                 "type": "string"
               },

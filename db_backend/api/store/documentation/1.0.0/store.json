@@ -529,17 +529,13 @@
             "type": "array",
             "items": {
               "required": [
-                "id",
-                "store_assigned"
+                "id"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
                 "job_title": {
-                  "type": "string"
-                },
-                "store_assigned": {
                   "type": "string"
                 },
                 "salary": {
@@ -611,17 +607,13 @@
           },
           "manager": {
             "required": [
-              "id",
-              "store_assigned"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
               "job_title": {
-                "type": "string"
-              },
-              "store_assigned": {
                 "type": "string"
               },
               "salary": {

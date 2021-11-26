@@ -15,9 +15,9 @@
     "name": {
       "type": "string"
     },
-    "pds": {
+    "products": {
       "via": "product_type",
-      "collection": "pd"
+      "collection": "product"
     }
   }
 }

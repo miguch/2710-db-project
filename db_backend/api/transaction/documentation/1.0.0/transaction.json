@@ -311,6 +311,77 @@
         "parameters": []
       }
     },
+    "/transactions/do": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Transaction"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/transactions/{id}": {
       "get": {
         "deprecated": false,
@@ -528,17 +599,13 @@
           },
           "salesperson": {
             "required": [
-              "id",
-              "store_assigned"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
               "job_title": {
-                "type": "string"
-              },
-              "store_assigned": {
                 "type": "string"
               },
               "salary": {
@@ -579,49 +646,6 @@
               }
             }
           },
-          "products": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "amount",
-                "price"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "amount": {
-                  "type": "integer"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "product_type": {
-                  "type": "string"
-                },
-                "PR_tran": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "customer": {
             "required": [
               "id"
@@ -629,12 +653,6 @@
             "properties": {
               "id": {
                 "type": "string"
-              },
-              "cus_tran": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "user": {
                 "type": "string"
@@ -678,11 +696,39 @@
               }
             }
           },
-          "price": {
-            "type": "number"
-          },
-          "quantity": {
-            "type": "integer"
+          "product_transactions": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "transaction": {
+                  "type": "string"
+                },
+                "product": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -695,20 +741,14 @@
           "salesperson": {
             "type": "string"
           },
-          "products": {
+          "customer": {
+            "type": "string"
+          },
+          "product_transactions": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "customer": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number"
-          },
-          "quantity": {
-            "type": "integer"
           },
           "created_by": {
             "type": "string"

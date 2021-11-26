@@ -17,6 +17,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/transactions/do",
+      "handler": "transaction.purchase",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/transactions/:id",
       "handler": "transaction.findOne",

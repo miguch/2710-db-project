@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "cus_tran": {
-      "collection": "transaction"
-    },
     "user": {
       "plugin": "users-permissions",
       "model": "user"

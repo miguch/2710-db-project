@@ -538,14 +538,11 @@
           "name": {
             "type": "string"
           },
-          "pds": {
+          "products": {
             "type": "array",
             "items": {
               "required": [
-                "id",
-                "name",
-                "amount",
-                "price"
+                "id"
               ],
               "properties": {
                 "id": {
@@ -563,13 +560,16 @@
                 "description": {
                   "type": "string"
                 },
-                "PR_tran": {
+                "product_type": {
+                  "type": "string"
+                },
+                "product_transactions": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "product_type": {
+                "published_at": {
                   "type": "string"
                 },
                 "created_by": {
@@ -588,7 +588,7 @@
           "name": {
             "type": "string"
           },
-          "pds": {
+          "products": {
             "type": "array",
             "items": {
               "type": "string"

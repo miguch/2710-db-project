@@ -15,10 +15,6 @@
     "job_title": {
       "type": "string"
     },
-    "store_assigned": {
-      "type": "string",
-      "required": true
-    },
     "salary": {
       "type": "float"
     },

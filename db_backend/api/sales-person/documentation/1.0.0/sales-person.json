@@ -529,17 +529,13 @@
     "schemas": {
       "Sales-person": {
         "required": [
-          "id",
-          "store_assigned"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
           "job_title": {
-            "type": "string"
-          },
-          "store_assigned": {
             "type": "string"
           },
           "salary": {
@@ -649,20 +645,14 @@
                 "salesperson": {
                   "type": "string"
                 },
-                "products": {
+                "customer": {
+                  "type": "string"
+                },
+                "product_transactions": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "customer": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "quantity": {
-                  "type": "integer"
                 },
                 "created_by": {
                   "type": "string"
@@ -680,14 +670,8 @@
         }
       },
       "NewSales-person": {
-        "required": [
-          "store_assigned"
-        ],
         "properties": {
           "job_title": {
-            "type": "string"
-          },
-          "store_assigned": {
             "type": "string"
           },
           "salary": {

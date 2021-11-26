@@ -5,8 +5,4 @@
  * to customize this controller
  */
 
-module.exports = {
-  purchase: async (ctx) => {
-    console.log(ctx);
-  }
-};
+module.exports = {};

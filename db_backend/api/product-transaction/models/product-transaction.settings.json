@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_transactions",
+  "info": {
+    "name": "Product_Transaction",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "transaction": {
+      "model": "transaction",
+      "via": "product_transactions"
+    },
+    "product": {
+      "model": "product",
+      "via": "product_transactions"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "amount": {
+      "type": "integer"
+    }
+  }
+}

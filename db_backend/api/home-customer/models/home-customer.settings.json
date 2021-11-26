@@ -35,8 +35,8 @@
       "type": "integer"
     },
     "customer": {
-      "model": "customers",
-      "via": "home_customer"
+      "via": "home_customer",
+      "model": "customers"
     }
   }
 }

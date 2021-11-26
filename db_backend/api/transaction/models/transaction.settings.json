@@ -16,22 +16,16 @@
       "type": "date"
     },
     "salesperson": {
-      "model": "sales-person",
-      "via": "transactions"
-    },
-    "products": {
-      "via": "PR_tran",
-      "collection": "pd"
+      "via": "transactions",
+      "model": "sales-person"
     },
     "customer": {
-      "model": "customers",
-      "via": "transactions"
+      "via": "transactions",
+      "model": "customers"
     },
-    "price": {
-      "type": "decimal"
-    },
-    "quantity": {
-      "type": "integer"
+    "product_transactions": {
+      "via": "transaction",
+      "collection": "product-transaction"
     }
   }
 }
