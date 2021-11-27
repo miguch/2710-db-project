@@ -522,9 +522,6 @@
           "id": {
             "type": "string"
           },
-          "num_salesperson": {
-            "type": "integer"
-          },
           "store_saleperson": {
             "type": "array",
             "items": {
@@ -564,9 +561,6 @@
                   "items": {
                     "type": "string"
                   }
-                },
-                "published_at": {
-                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -643,9 +637,6 @@
                   "type": "string"
                 }
               },
-              "published_at": {
-                "type": "string"
-              },
               "created_by": {
                 "type": "string"
               },
@@ -653,14 +644,14 @@
                 "type": "string"
               }
             }
+          },
+          "name": {
+            "type": "string"
           }
         }
       },
       "NewStore": {
         "properties": {
-          "num_salesperson": {
-            "type": "integer"
-          },
           "store_saleperson": {
             "type": "array",
             "items": {
@@ -671,6 +662,9 @@
             "type": "string"
           },
           "manager": {
+            "type": "string"
+          },
+          "name": {
             "type": "string"
           },
           "created_by": {

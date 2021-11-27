@@ -1,5 +1,9 @@
 import { lazy } from 'react';
-import { DashboardFilled, ShoppingCartOutlined } from '@ant-design/icons';
+import {
+  AreaChartOutlined,
+  DashboardFilled,
+  ShoppingCartOutlined
+} from '@ant-design/icons';
 import { ContactsOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 
@@ -72,6 +76,13 @@ const STATIC_ROUTES = [
     filterRole: ['customer'],
     icon: ShoppingCartOutlined
   },
+  {
+    name: 'Aggregation',
+    link: '/aggregation',
+    path: '/aggregation',
+    component: lazy(() => import('../Pages/Aggregation')),
+    icon: AreaChartOutlined
+  }
 ];
 
 export default function useRoutes() {

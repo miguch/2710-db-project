@@ -27,10 +27,6 @@
     "product_type": {
       "model": "product-kind",
       "via": "products"
-    },
-    "product_transactions": {
-      "via": "product",
-      "collection": "product-transaction"
     }
   }
 }

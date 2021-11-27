@@ -38,18 +38,18 @@ module.exports = {
     await Promise.all(
       entities.map(async (item) => {
         if (item.salesperson) {
-          item.salesperson_user = await strapi.services["sales-person"].findOne(
-            item.salesperson.id
-          );
+          item.salesperson_user = await strapi.services["sales-person"].findOne({
+            id: item.salesperson.id
+          });
         }
         if (item.customer) {
-          item.customer_user = await strapi.services["customers"].findOne(
-            item.customer.id
-          );
+          item.customer_user = await strapi.services["customers"].findOne({
+            id: item.customer.id
+          });
         }
         await Promise.all(
           item.product_transactions.map(async (pt) => {
-            pt.product = await strapi.services.product.findOne(pt.product);
+            pt.product = await strapi.services.product.findOne({id: pt.product});
           })
         );
       })
@@ -132,7 +132,6 @@ module.exports = {
           throw err;
         }
       });
-    console.log(resp);
     return resp;
   },
 };

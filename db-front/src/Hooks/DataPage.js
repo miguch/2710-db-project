@@ -67,7 +67,7 @@ export default function useDataPage(
       setEditTarget(item);
       const formValues = { ...item };
       for (const field of schema) {
-        if (field.relationApi) {
+        if (field.relationApi && formValues[field.name]) {
           formValues[field.name] = formValues[field.name].id;
         }
       }
@@ -100,20 +100,24 @@ export default function useDataPage(
   );
   const tableColumns = useMemo(() => {
     const tableColumns = [...columns];
-    if (handlers.onUpdate || handlers.onDelete) {
+    if (handlers.onEdit || handlers.onDelete) {
       tableColumns.push({
         title: 'Modify',
         render: (_, item) => (
           <>
-            <Button
-              onClick={() => onClickUpdate(item)}
-              style={{ marginRight: '6px' }}
-            >
-              <EditOutlined></EditOutlined>Update
-            </Button>
-            <Button onClick={() => onClickDelete(item)} danger>
-              <DeleteOutlined></DeleteOutlined>Delete
-            </Button>
+            {handlers.onEdit && (
+              <Button
+                onClick={() => onClickUpdate(item)}
+                style={{ marginRight: '6px' }}
+              >
+                <EditOutlined></EditOutlined>Update
+              </Button>
+            )}
+            {handlers.onDelete && (
+              <Button onClick={() => onClickDelete(item)} danger>
+                <DeleteOutlined></DeleteOutlined>Delete
+              </Button>
+            )}
           </>
         )
       });

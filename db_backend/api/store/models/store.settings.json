@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "num_salesperson": {
-      "type": "integer"
-    },
     "store_saleperson": {
       "via": "store",
       "collection": "sales-person"
@@ -25,6 +22,9 @@
     },
     "manager": {
       "model": "sales-person"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }

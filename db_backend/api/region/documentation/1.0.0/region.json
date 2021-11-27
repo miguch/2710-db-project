@@ -563,9 +563,6 @@
                   "type": "string"
                 }
               },
-              "published_at": {
-                "type": "string"
-              },
               "created_by": {
                 "type": "string"
               },
@@ -584,9 +581,6 @@
                 "id": {
                   "type": "string"
                 },
-                "num_salesperson": {
-                  "type": "integer"
-                },
                 "store_saleperson": {
                   "type": "array",
                   "items": {
@@ -597,6 +591,9 @@
                   "type": "string"
                 },
                 "manager": {
+                  "type": "string"
+                },
+                "name": {
                   "type": "string"
                 },
                 "created_by": {

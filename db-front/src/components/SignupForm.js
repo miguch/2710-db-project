@@ -1,6 +1,15 @@
-import { Modal, Form, Input, Button, Radio, Select, InputNumber } from 'antd';
+import {
+  Modal,
+  Form,
+  Input,
+  Button,
+  Radio,
+  Select,
+  InputNumber,
+  message
+} from 'antd';
 import { Field } from 'rc-field-form';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useNetwork from '../Hooks/Network';
 import { setLoginRequired, setUserInfo } from '../store/modules/userInfo';
@@ -8,7 +17,8 @@ import storage from '../utils/storage';
 
 const API = {
   login: '/auth/local',
-  register: '/auth/local/register'
+  register: '/auth/local/register',
+  storeList: '/stores'
 };
 
 export default function SignupForm({ onLogin }) {
@@ -24,6 +34,21 @@ export default function SignupForm({ onLogin }) {
   const [form] = Form.useForm();
   const [signupLoading, setSignupLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [storeList, setStoreList] = useState([]);
+
+  useEffect(() => {
+    service({
+      method: 'get',
+      url: API.storeList
+    })
+      .then((res) => {
+        setStoreList(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error('Failed to fetch stores list');
+      });
+  }, [service]);
 
   const onSignup = useCallback(() => {
     setErrorMsg('');
@@ -142,6 +167,7 @@ export default function SignupForm({ onLogin }) {
         </Form.Item>
         <Form.Item
           name="zipcode"
+          rules={[{ required: true }]}
           style={{
             display: 'inline-block',
             width: 'calc(33% - 4px)'
@@ -230,8 +256,16 @@ export default function SignupForm({ onLogin }) {
           <Form.Item name="job_title" label="Job Title">
             <Input></Input>
           </Form.Item>
-          <Form.Item name="store_assigned" label="Store">
-            <Input></Input>
+          <Form.Item name="store" label="Store" rules={[{required: true}]}>
+            <Select
+              getPopupContainer={(triggerNode) => triggerNode.parentElement}
+            >
+              {storeList.map((s) => (
+                <Select.Option value={s.id} key={s.id}>
+                  {s.name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item name="salary" label="Salary">
             <Input></Input>

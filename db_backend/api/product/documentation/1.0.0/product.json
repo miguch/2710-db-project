@@ -559,37 +559,6 @@
               }
             }
           },
-          "product_transactions": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "transaction": {
-                  "type": "string"
-                },
-                "product": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "amount": {
-                  "type": "integer"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -612,12 +581,6 @@
           },
           "product_type": {
             "type": "string"
-          },
-          "product_transactions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "published_at": {
             "type": "string",

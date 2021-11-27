@@ -14,16 +14,16 @@ const SCHEMA = [
     formHidden: true
   },
   {
+    title: 'Name',
+    name: 'name',
+  },
+  {
     title: 'Manager',
     name: 'manager',
     relationApi: '/sales-people',
     relationField: 'user.username',
     tableRenderField: 'managerName',
     type: 'select'
-  },
-  {
-    title: 'Salespersons',
-    name: 'num_salesperson'
   },
   {
     title: 'Region',

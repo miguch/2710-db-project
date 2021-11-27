@@ -563,12 +563,6 @@
                 "product_type": {
                   "type": "string"
                 },
-                "product_transactions": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "published_at": {
                   "type": "string"
                 },

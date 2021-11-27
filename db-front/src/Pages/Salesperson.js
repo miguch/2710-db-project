@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useAntTable from '../Hooks/Table';
 import useDataPage from '../Hooks/DataPage';
 import useDataHandlers from '../Hooks/Data';
+import { useSelector } from 'react-redux';
 
 const TITLE = 'Salesperson';
 const SCHEMA = [
@@ -15,6 +16,7 @@ const SCHEMA = [
   {
     title: 'Name',
     name: 'name',
+    formHidden: true,
     render: (_, item) => item.user.username
   },
   {
@@ -35,28 +37,32 @@ const SCHEMA = [
   },
   {
     title: 'Store',
-    name: 'store_assigned'
+    name: 'store',
+    relationField: 'name',
+    relationApi: '/stores',
+    type: 'select'
   },
   {
     title: 'Salary',
     name: 'salary'
-  },
-  {
-    title: 'Detail',
-    render: (_, item) => <Button>Show Details</Button>
   }
 ];
 
 const apiName = 'sales-people';
 const API = {
-  get: `/${apiName}`
+  get: `/${apiName}`,
   // create: `/${apiName}`,
-  // update: (id) => `/${apiName}/${id}`,
+  update: (id) => `/${apiName}/${id}`
   // delete: (id) => `/${apiName}/${id}`
 };
 
 export default function Salesperson() {
-  const handlers = useDataHandlers(API);
+  const api = { ...API };
+  const userInfo = useSelector((state) => state.userInfo.userInfo);
+  if (userInfo?.role?.name !== 'salesperson') {
+    delete api.update;
+  }
+  const handlers = useDataHandlers(api);
 
   const page = useDataPage(TITLE, SCHEMA, handlers.dataLoader, handlers, []);
   return page;
