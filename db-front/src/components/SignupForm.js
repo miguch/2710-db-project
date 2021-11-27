@@ -141,6 +141,20 @@ export default function SignupForm({ onLogin }) {
       >
         <Input.Password></Input.Password>
       </Form.Item>
+      <Form.Item
+        rules={[
+          {
+            pattern: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+            message: 'Phone number not valid',
+            // Ant design bug: https://github.com/ant-design/ant-design/issues/28378
+            // validateTrigger: 'onBlur'
+          }
+        ]}
+        name="phone"
+        label="Phone"
+      >
+        <Input></Input>
+      </Form.Item>
       <Form.Item label="Address" style={{ marginBottom: 0 }}>
         <Form.Item name="street">
           <Input placeholder="street"></Input>
@@ -167,7 +181,6 @@ export default function SignupForm({ onLogin }) {
         </Form.Item>
         <Form.Item
           name="zipcode"
-          rules={[{ required: true }]}
           style={{
             display: 'inline-block',
             width: 'calc(33% - 4px)'
@@ -231,7 +244,6 @@ export default function SignupForm({ onLogin }) {
                 </Form.Item>
                 <Form.Item
                   name="age"
-                  rules={[{ required: true }]}
                   style={{
                     display: 'inline-block',
                     width: 'calc(33% - 4px)'
@@ -247,7 +259,7 @@ export default function SignupForm({ onLogin }) {
               <Input placeholder="Business Category"></Input>
             </Form.Item>
           )}
-          <Form.Item name="income" rules={[{ required: true }]} label="Income">
+          <Form.Item name="income" label="Income">
             <InputNumber></InputNumber>
           </Form.Item>
         </>

@@ -45,6 +45,16 @@ export default function Customer() {
       name: 'zipcode'
     },
     {
+      title: 'Phone',
+      name: 'phone',
+      rules: [
+        {
+          pattern: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+          message: 'phone number not valid'
+        }
+      ]
+    },
+    {
       title: 'Kind',
       formHidden: true,
       name: 'kind'

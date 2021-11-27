@@ -527,7 +527,8 @@ module.exports = {
         if (params.type === "customer") {
           const newCustomer = {};
           for (const f of addressFields) {
-            newCustomer[f] = params[f];
+            newCustomer[f] =
+              typeof params[f] === "undefined" ? null : params[f];
           }
           newCustomer.kind = params.kind;
           newCustomer.user = user.id;
@@ -539,8 +540,9 @@ module.exports = {
               {
                 marriage: params.marriage,
                 gender: params.gender,
-                age: params.age,
-                income: params.income,
+                age: typeof params.age === "undefined" ? null : params.age,
+                income:
+                  typeof params.income === "undefined" ? null : params.income,
                 customer: customer.id,
               },
               { transacting: trx }
@@ -558,7 +560,8 @@ module.exports = {
               .create(
                 {
                   category: params.category,
-                  income: params.income,
+                  income:
+                    typeof params.income === "undefined" ? null : params.income,
                   customer: customer.id,
                 },
                 { transacting: trx }
@@ -575,7 +578,8 @@ module.exports = {
           const newSalesperson = {};
           const salesFields = ["job_title", "store", "salary"];
           for (const f of [...addressFields, ...salesFields]) {
-            newSalesperson[f] = params[f];
+            newSalesperson[f] =
+              typeof params[f] === "undefined" ? null : params[f];
           }
           newSalesperson.user = user.id;
           await strapi
