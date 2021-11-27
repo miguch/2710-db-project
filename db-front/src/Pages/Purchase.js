@@ -1,4 +1,4 @@
-import { Button, InputNumber, message, Modal, Table } from 'antd';
+import { Button, Input, InputNumber, message, Modal, Table, Form } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 import useAntTable from '../Hooks/Table';
 import useDataPage from '../Hooks/DataPage';
@@ -23,12 +23,30 @@ export default function Customer() {
   // product id to {purchase amount, product}
   const [selected, setSelected] = useState({});
   const [showPurchaseDialog, setShowPurchaseDialog] = useState(false);
+  const [searchForm] = Form.useForm();
   const onClickPurchase = useCallback(
     (item) => {
       setSelected({ ...selected, [item.id]: { product: item, quantity: 1 } });
     },
     [selected]
   );
+
+  useEffect(() => {
+    const originLoader = handlers.dataLoader;
+    handlers.dataLoader = async (current, pageSize, filter, sorter) => {
+      const query = searchForm.getFieldValue('name');
+      let queryParams = {};
+      if (query) {
+        queryParams['name_contains'] = query;
+      }
+      return originLoader(current, pageSize, filter, sorter, queryParams);
+    };
+  }, [handlers, searchForm]);
+
+  const onSearch = useCallback(() => {
+    handlers.doReload();
+  }, [handlers]);
+
   const SCHEMA = [
     {
       title: 'Product ID',
@@ -38,7 +56,8 @@ export default function Customer() {
     },
     {
       title: 'Name',
-      name: 'name'
+      name: 'name',
+      sorter: true
     },
     // {
     //   title: 'In Stock',
@@ -48,7 +67,8 @@ export default function Customer() {
     {
       title: 'Price',
       name: 'price',
-      type: 'number'
+      type: 'number',
+      sorter: true
     },
     {
       title: 'Description',
@@ -59,7 +79,8 @@ export default function Customer() {
       name: 'product_type',
       relationApi: '/product-kinds',
       relationField: 'name',
-      type: 'select'
+      type: 'select',
+      sorter: true
     },
     {
       title: 'Purchase',
@@ -131,12 +152,23 @@ export default function Customer() {
           Check out
         </Button>
       </div>
+    ),
+    beforeTable: () => (
+      <Form form={searchForm} layout="inline">
+        <Form.Item name="name" label="Name">
+          <Input></Input>
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit" type="primary" onClick={onSearch}>
+            Search
+          </Button>
+        </Form.Item>
+      </Form>
     )
   });
   return (
     <>
       {page}
-
       <Modal
         title="Purchase"
         footer={null}

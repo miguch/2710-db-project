@@ -14,9 +14,9 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
   });
   const [tableData, setTableData] = useState(defaultData);
   const loadData = useCallback(
-    (pagination) => {
+    (pagination, filter, sorter) => {
       setLoading(true);
-      dataLoader(pagination.current, pagination.pageSize)
+      dataLoader(pagination.current, pagination.pageSize, filter, sorter)
         .then((data) => {
           setTableData(data.data);
           setPagination({ ...pagination, total: data.total });
@@ -40,7 +40,7 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
         current: newPagination.current,
         pageSize: newPagination.pageSize
       });
-      loadData(newPagination);
+      loadData(newPagination, filters, sorter);
     },
     [pagination, loadData]
   );

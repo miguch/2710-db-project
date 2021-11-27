@@ -9,13 +9,25 @@ export default function useDataHandlers(apis) {
   const res = useMemo(() => {
     const res = {};
     if (apis.get) {
-      res.dataLoader = async (current, pageSize) => {
+      res.dataLoader = async (current, pageSize, filter, sorter, additionalParams) => {
         try {
+          let sortParams = {};
+          if (sorter && sorter.column) {
+            console.log(sorter);
+            const orderMap = {
+              ascend: 'ASC',
+              descend: 'DESC'
+            };
+            sortParams['_sort'] =
+              sorter.column.dataIndex + ':' + orderMap[sorter.order];
+          }
           const res = await service({
             method: 'get',
             url: `${apis.get}?${querystring.stringify({
               _start: (current - 1) * pageSize,
-              _limit: pageSize
+              _limit: pageSize,
+              ...sortParams,
+              ...additionalParams
             })}`
           });
           const count = await service({
@@ -33,7 +45,7 @@ export default function useDataHandlers(apis) {
       };
       res.doReload = () => {
         reloadFunc.current && reloadFunc.current();
-      }
+      };
     }
     if (apis.create) {
       res.onCreate = async (newData) => {

@@ -17,7 +17,7 @@ export default function useDataPage(
   handlers = {},
   defaultData = [],
   customActions = {},
-  permissions = {},
+  permissions = {}
 ) {
   const { onTableChange, reload, pagination, loading, tableData, columns } =
     useAntTable(dataLoader, schema, defaultData);
@@ -141,6 +141,7 @@ export default function useDataPage(
         )}
         {customActions.header && customActions.header()}
       </div>
+      {customActions.beforeTable && customActions.beforeTable()}
       <Table
         columns={tableColumns}
         dataSource={tableData}
