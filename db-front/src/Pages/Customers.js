@@ -46,10 +46,12 @@ export default function Customer() {
     },
     {
       title: 'Kind',
+      formHidden: true,
       name: 'kind'
     },
     {
       title: 'Detail',
+      formHidden: true,
       render: (_, item) => (
         <Button onClick={() => setDetails(item)}>Show Details</Button>
       )

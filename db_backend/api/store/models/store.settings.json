@@ -25,6 +25,10 @@
     },
     "name": {
       "type": "string"
+    },
+    "product_stores": {
+      "via": "store",
+      "collection": "product-store"
     }
   }
 }

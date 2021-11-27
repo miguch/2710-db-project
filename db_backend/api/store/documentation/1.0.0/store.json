@@ -647,6 +647,37 @@
           },
           "name": {
             "type": "string"
+          },
+          "product_stores": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "product": {
+                  "type": "string"
+                },
+                "store": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "integer"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -666,6 +697,12 @@
           },
           "name": {
             "type": "string"
+          },
+          "product_stores": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

@@ -551,9 +551,6 @@
                 "name": {
                   "type": "string"
                 },
-                "amount": {
-                  "type": "integer"
-                },
                 "price": {
                   "type": "number"
                 },
@@ -562,6 +559,12 @@
                 },
                 "product_type": {
                   "type": "string"
+                },
+                "product_stores": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "published_at": {
                   "type": "string"

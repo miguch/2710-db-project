@@ -15,9 +15,6 @@
     "name": {
       "type": "string"
     },
-    "amount": {
-      "type": "integer"
-    },
     "price": {
       "type": "decimal"
     },
@@ -27,6 +24,10 @@
     "product_type": {
       "model": "product-kind",
       "via": "products"
+    },
+    "product_stores": {
+      "via": "product",
+      "collection": "product-store"
     }
   }
 }

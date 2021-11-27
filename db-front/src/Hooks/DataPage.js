@@ -16,7 +16,7 @@ export default function useDataPage(
   dataLoader,
   handlers = {},
   defaultData = [],
-  customAction = null,
+  customActions = {},
   permissions = {},
 ) {
   const { onTableChange, reload, pagination, loading, tableData, columns } =
@@ -31,6 +31,7 @@ export default function useDataPage(
   const [antForm] = Form.useForm();
   const onNew = useCallback(() => {
     setDrawerVisible(true);
+    setEditTarget(null);
     antForm.resetFields();
   }, [antForm]);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -138,7 +139,7 @@ export default function useDataPage(
             New {title}
           </Button>
         )}
-        {customAction && customAction()}
+        {customActions.header && customActions.header()}
       </div>
       <Table
         columns={tableColumns}

@@ -2,7 +2,10 @@ import { lazy } from 'react';
 import {
   AreaChartOutlined,
   DashboardFilled,
-  ShoppingCartOutlined
+  ShopOutlined,
+  ShoppingCartOutlined,
+  ShoppingOutlined,
+  WalletOutlined
 } from '@ant-design/icons';
 import { ContactsOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
@@ -35,7 +38,7 @@ const STATIC_ROUTES = [
     path: '/product',
     filterRole: ['salesperson'],
     component: lazy(() => import('../Pages/Products')),
-    icon: ContactsOutlined
+    icon: WalletOutlined
   },
   {
     name: 'Product Type',
@@ -51,7 +54,7 @@ const STATIC_ROUTES = [
     path: '/store',
     filterRole: ['salesperson'],
     component: lazy(() => import('../Pages/Store')),
-    icon: ContactsOutlined
+    icon: ShopOutlined
   },
   {
     name: 'Region',
@@ -62,11 +65,11 @@ const STATIC_ROUTES = [
     icon: ContactsOutlined
   },
   {
-    name: 'Transaction',
+    name: 'Transactions',
     link: '/transaction',
     path: '/transaction',
     component: lazy(() => import('../Pages/Transaction')),
-    icon: ContactsOutlined
+    icon: ShoppingOutlined
   },
   {
     name: 'Purchase',

@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_stores",
+  "info": {
+    "name": "Product_Store"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product": {
+      "model": "product",
+      "via": "product_stores"
+    },
+    "store": {
+      "model": "store",
+      "via": "product_stores"
+    },
+    "amount": {
+      "type": "integer"
+    }
+  }
+}

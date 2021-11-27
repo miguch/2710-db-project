@@ -40,11 +40,11 @@ export default function Customer() {
       title: 'Name',
       name: 'name'
     },
-    {
-      title: 'In Stock',
-      name: 'amount',
-      type: 'number'
-    },
+    // {
+    //   title: 'In Stock',
+    //   name: 'amount',
+    //   type: 'number'
+    // },
     {
       title: 'Price',
       name: 'price',
@@ -102,13 +102,8 @@ export default function Customer() {
     }
   ];
 
-  const page = useDataPage(
-    TITLE,
-    SCHEMA,
-    handlers.dataLoader,
-    handlers,
-    [],
-    () => (
+  const page = useDataPage(TITLE, SCHEMA, handlers.dataLoader, handlers, [], {
+    header: () => (
       <div style={{ float: 'right' }}>
         <span style={{ marginRight: 8, fontSize: 14 }}>
           Total: $
@@ -137,7 +132,7 @@ export default function Customer() {
         </Button>
       </div>
     )
-  );
+  });
   return (
     <>
       {page}

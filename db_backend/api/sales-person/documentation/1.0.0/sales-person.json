@@ -564,6 +564,12 @@
               "name": {
                 "type": "string"
               },
+              "product_stores": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },

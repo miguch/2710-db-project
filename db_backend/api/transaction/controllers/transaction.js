@@ -21,14 +21,14 @@ module.exports = {
       }
       query["customer"] = customer_info.id;
     } else if (ctx.state.user && ctx.state.user.role.name === "salesperson") {
-      const salse_info = await strapi.services["sales-person"].findOne({
+      const sales_info = await strapi.services["sales-person"].findOne({
         user: ctx.state.user.id,
       });
-      if (!salse_info) {
+      if (!sales_info) {
         ctx.response.badRequest("Customer information not found");
         return;
       }
-      query["salesperson"] = salse_info.id;
+      query["salesperson"] = sales_info.id;
     }
     if (ctx.query._q) {
       entities = await strapi.services.transaction.search(query);
