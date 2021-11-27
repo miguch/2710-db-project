@@ -12,11 +12,18 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
     showTotal: (total, range) =>
       `Showing ${range[0]}-${range[1]} of ${total} records`
   });
+  const [filters, setFilters] = useState(null);
+  const [sorter, setSorter] = useState(null);
   const [tableData, setTableData] = useState(defaultData);
   const loadData = useCallback(
-    (pagination, filter, sorter) => {
+    (pagination, filter, sorter, newLoader) => {
       setLoading(true);
-      dataLoader(pagination.current, pagination.pageSize, filter, sorter)
+      (newLoader || dataLoader)(
+        pagination.current,
+        pagination.pageSize,
+        filter,
+        sorter
+      )
         .then((data) => {
           setTableData(data.data);
           setPagination({ ...pagination, total: data.total });
@@ -35,18 +42,24 @@ export default function useAntTable(dataLoader, schema, defaultData = []) {
   useEffect(() => loadData(pagination), []);
   const onTableChange = useCallback(
     (newPagination, filters, sorter) => {
-      setPagination({
+      newPagination = {
         ...pagination,
         current: newPagination.current,
         pageSize: newPagination.pageSize
-      });
+      };
+      setPagination(newPagination);
+      setFilters(filters);
+      setSorter(sorter);
       loadData(newPagination, filters, sorter);
     },
     [pagination, loadData]
   );
-  const reload = useCallback(() => {
-    loadData(pagination);
-  }, [loadData, pagination]);
+  const reload = useCallback(
+    (newLoader) => {
+      loadData(pagination, filters, sorter, newLoader);
+    },
+    [loadData, pagination, filters, sorter]
+  );
   const columns = useMemo(
     () => [
       {

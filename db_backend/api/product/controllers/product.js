@@ -8,15 +8,27 @@
 module.exports = {
   async find(ctx) {
     let entities;
+    let salesperson = ctx.query.salesperson;
+    delete ctx.query.salesperson;
     if (ctx.query._q) {
       entities = await strapi.services.product.search(ctx.query);
     } else {
       entities = await strapi.services.product.find(ctx.query);
     }
-    if (ctx.state.user && ctx.state.user.role.name === "salesperson") {
-      const sales_info = await strapi.services["sales-person"].findOne({
-        user: ctx.state.user.id,
-      });
+    if (
+      salesperson ||
+      (ctx.state.user && ctx.state.user.role.name === "salesperson")
+    ) {
+      let sales_info;
+      if (salesperson) {
+        sales_info = await strapi.services["sales-person"].findOne({
+          id: salesperson,
+        });
+      } else {
+        sales_info = await strapi.services["sales-person"].findOne({
+          user: ctx.state.user.id,
+        });
+      }
       if (sales_info && sales_info.store) {
         await Promise.all(
           entities.map(async (entity) => {

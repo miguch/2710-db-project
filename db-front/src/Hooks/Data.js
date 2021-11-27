@@ -43,8 +43,8 @@ export default function useDataHandlers(apis) {
       res.onReload = (func) => {
         reloadFunc.current = func;
       };
-      res.doReload = () => {
-        reloadFunc.current && reloadFunc.current();
+      res.doReload = (...args) => {
+        reloadFunc.current && reloadFunc.current(...args);
       };
     }
     if (apis.create) {

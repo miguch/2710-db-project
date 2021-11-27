@@ -27,17 +27,22 @@ export default function Customer() {
       },
       {
         title: 'Name',
-        name: 'name'
+        name: 'name',
+        sorter: true,
+        rules: [{required: true}]
       },
       {
         title: 'Inventory',
         name: 'amount',
-        type: 'number'
+        type: 'number',
+        rules: [{required: true}]
       },
       {
         title: 'Price',
         name: 'price',
-        type: 'number'
+        sorter: true,
+        type: 'number',
+        rules: [{required: true}]
       },
       {
         title: 'Description',
@@ -48,7 +53,9 @@ export default function Customer() {
         name: 'product_type',
         relationApi: '/product-kinds',
         relationField: 'name',
-        type: 'select'
+        sorter: true,
+        type: 'select',
+        rules: [{required: true}]
       }
     ],
     []

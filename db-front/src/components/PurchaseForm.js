@@ -6,17 +6,26 @@ const API = '/transactions/do';
 
 export default function PurchaseForm({
   selectedProducts,
+  salesperson,
   onClose,
   onComplete
 }) {
   const [form] = Form.useForm();
   const service = useNetwork();
   useEffect(() => {
-    form.setFieldsValue({
-      quantity: 1,
-      salesperson: null
-    });
+    form.setFieldsValue({});
   }, [selectedProducts, form]);
+  useEffect(() => {
+    if (salesperson) {
+      form.setFieldsValue({
+        salesPerson: salesperson
+      });
+    } else {
+      form.setFieldsValue({
+        salesPerson: null
+      });
+    }
+  }, [salesperson, form]);
   const [submitting, setSubmitting] = useState(false);
   const onSubmit = useCallback(() => {
     form.validateFields().then(async (values) => {
@@ -38,14 +47,14 @@ export default function PurchaseForm({
           }
         });
         if (res.success) {
-          message.success("Order placed!")
+          message.success('Order placed!');
           onComplete();
         } else {
           message.warn(res.msg);
         }
       } catch (err) {
         console.log(err);
-        message.error("request error");
+        message.error('request error');
       } finally {
         setSubmitting(false);
       }
@@ -97,7 +106,7 @@ export default function PurchaseForm({
             <Select>
               {salespeople.map((person) => (
                 <Select.Option key={person.id} value={person.id}>
-                  {person.user.username}
+                  {person.user.username} ({person.store.name})
                 </Select.Option>
               ))}
             </Select>

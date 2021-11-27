@@ -16,6 +16,7 @@ const SCHEMA = [
   {
     title: 'Name',
     name: 'name',
+    rules: [{ required: true }]
   },
   {
     title: 'Manager',
@@ -30,7 +31,8 @@ const SCHEMA = [
     name: 'region',
     relationApi: '/regions',
     relationField: 'region_name',
-    type: 'select'
+    type: 'select',
+    rules: [{ required: true }]
   }
 ];
 

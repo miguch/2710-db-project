@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-
   async find(ctx) {
     let entities;
     entities = await strapi.services["customers"].find(ctx.query);
@@ -30,10 +29,7 @@ module.exports = {
       // update phone
       await strapi
         .query("user", "users-permissions")
-        .update(
-          { id: entity.user.id },
-          { phone: ctx.request.body.phone }
-        );
+        .update({ id: entity.user.id }, { phone: ctx.request.body.phone });
     }
     return entity;
   },
@@ -43,25 +39,34 @@ module.exports = {
 
     let entity;
     await strapi.connections.default.transaction(async (trx) => {
-      entity = await strapi.query('customers').delete(
-        { id },
-        { transacting: trx }
-      );
-      await strapi
-        .query("user", "users-permissions")
-        .delete({ id: entity.user.id }, { transacting: trx });
-      if (entity.business_customer) {
-        await strapi.query('business-customer').delete(
-          { id: entity.business_customer.id },
-          { transacting: trx }
-        );
-      }
-      if (entity.home_customer) {
-        await strapi.query('home_customer').delete(
-          { id: entity.home_customer.id },
-          { transacting: trx }
-        );
-      }
+      // use foreign key constraint
+      entity = await strapi
+        .query("customers")
+        .findOne({ id }, { transacting: trx });
+      await strapi.connections.default
+        .raw(`DELETE FROM \`users-permissions_user\` WHERE id=?`, [
+          entity.user,
+        ])
+        .transacting(trx);
+      // entity = await strapi.query('customers').delete(
+      //   { id },
+      //   { transacting: trx }
+      // );
+      // await strapi
+      //   .query("user", "users-permissions")
+      //   .delete({ id: entity.user.id }, { transacting: trx });
+      // if (entity.business_customer) {
+      //   await strapi.query('business-customer').delete(
+      //     { id: entity.business_customer.id },
+      //     { transacting: trx }
+      //   );
+      // }
+      // if (entity.home_customer) {
+      //   await strapi.query('home_customer').delete(
+      //     { id: entity.home_customer.id },
+      //     { transacting: trx }
+      //   );
+      // }
     });
 
     return entity;
