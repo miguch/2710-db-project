@@ -8,10 +8,10 @@ const TITLE = 'Customer';
 
 const apiName = 'customers';
 const API = {
-  get: `/${apiName}`
+  get: `/${apiName}`,
   // create: `/${apiName}`,
-  // update: (id) => `/${apiName}/${id}`,
-  // delete: (id) => `/${apiName}/${id}`
+  update: (id) => `/${apiName}/${id}`,
+  delete: (id) => `/${apiName}/${id}`
 };
 
 export default function Customer() {
@@ -29,6 +29,7 @@ export default function Customer() {
     {
       title: 'Name',
       name: 'name',
+      formHidden: true,
       render: (_, item) => item.user.username
     },
     {

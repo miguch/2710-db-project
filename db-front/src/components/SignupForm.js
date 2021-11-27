@@ -231,6 +231,7 @@ export default function SignupForm({ onLogin }) {
                 </Form.Item>
                 <Form.Item
                   name="age"
+                  rules={[{ required: true }]}
                   style={{
                     display: 'inline-block',
                     width: 'calc(33% - 4px)'
@@ -246,7 +247,7 @@ export default function SignupForm({ onLogin }) {
               <Input placeholder="Business Category"></Input>
             </Form.Item>
           )}
-          <Form.Item name="income" label="Income">
+          <Form.Item name="income" rules={[{ required: true }]} label="Income">
             <InputNumber></InputNumber>
           </Form.Item>
         </>
@@ -256,7 +257,7 @@ export default function SignupForm({ onLogin }) {
           <Form.Item name="job_title" label="Job Title">
             <Input></Input>
           </Form.Item>
-          <Form.Item name="store" label="Store" rules={[{required: true}]}>
+          <Form.Item name="store" label="Store" rules={[{ required: true }]}>
             <Select
               getPopupContainer={(triggerNode) => triggerNode.parentElement}
             >

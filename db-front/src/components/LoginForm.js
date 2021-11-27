@@ -14,8 +14,8 @@ export default function LoginForm({onSignup}) {
   const dispatch = useDispatch();
   const service = useNetwork(false);
   const layout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 18 }
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 }
   };
   const tailLayout = {
     wrapperCol: { offset: 6, span: 18 }
@@ -57,7 +57,7 @@ export default function LoginForm({onSignup}) {
 
   return (
     <Form form={form} {...layout}>
-      <Form.Item rules={[{ required: true }]} name="email" label="Email">
+      <Form.Item rules={[{ required: true }]} name="email" label="Email/Username">
         <Input></Input>
       </Form.Item>
       <Form.Item rules={[{ required: true }]} name="password" label="Password">

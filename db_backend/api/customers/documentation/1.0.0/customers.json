@@ -603,9 +603,6 @@
               "customer": {
                 "type": "string"
               },
-              "published_at": {
-                "type": "string"
-              },
               "created_by": {
                 "type": "string"
               },
@@ -645,9 +642,6 @@
                 "type": "integer"
               },
               "customer": {
-                "type": "string"
-              },
-              "published_at": {
                 "type": "string"
               },
               "created_by": {
