@@ -4,7 +4,7 @@ The final project for INFSCI 2710.
 
 ## How to deploy
 Prerequisite: Docker, docker-compose
-1. craete a `.env` file that specify the following environment variables: DB_USER, DB_PASS, DB_ROOT_PASS
+1. create a `.env` file that specify the following environment variables: DB_USER, DB_PASS, DB_ROOT_PASS
 2. build the three containers: `docker-compose build`
 3. Start the Database first: `docker-compose up db -d`
 4. Enter the Database container: `docker exec -it 2710-db-project-db-1 bash`
