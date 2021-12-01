@@ -439,8 +439,8 @@ CREATE TABLE `transactions` (
                                 `created_at` timestamp NULL DEFAULT current_timestamp(),
                                 `updated_at` timestamp NULL DEFAULT current_timestamp(),
                                 PRIMARY KEY (`id`),
-                                FOREIGN KEY (salesperson) REFERENCES sales_people(id) ON DELETE NO ACTION,
-                                FOREIGN KEY (customer) REFERENCES customers(id) ON DELETE NO ACTION
+                                FOREIGN KEY (salesperson) REFERENCES sales_people(id) ON DELETE SET NULL,
+                                FOREIGN KEY (customer) REFERENCES customers(id) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4;
 CREATE INDEX customer_trans ON transactions(customer);
 CREATE INDEX sales_trans ON transactions(salesperson);
@@ -474,7 +474,7 @@ CREATE TABLE `product_transactions` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  FOREIGN KEY (product) REFERENCES products(id) ON DELETE NO ACTION,
+  FOREIGN KEY (product) REFERENCES products(id) ON DELETE SET NULL,
   FOREIGN KEY (transaction) REFERENCES transactions(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 CREATE INDEX prod_trans ON product_transactions(`transaction`, product);

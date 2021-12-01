@@ -66,10 +66,10 @@ export default function Transactions() {
         {details && (
           <Form labelCol={{span: 6}}>
             <Form.Item style={{ marginBottom: 0 }} label="Salesperson">
-              <span>{details.salesperson_user.user.username}</span>
+              <span>{details.salesperson_user?.user?.username}</span>
             </Form.Item>
             <Form.Item style={{ marginBottom: 0 }} label="Customer">
-              <span>{details.customer_user.user.username}</span>
+              <span>{details.customer_user?.user?.username}</span>
             </Form.Item>
             <Form.Item label="Product List">
               <List
