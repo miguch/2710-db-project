@@ -176,7 +176,7 @@ CREATE TABLE `products` (
         `product_type` int(10) unsigned NOT NULL,
         PRIMARY KEY (`id`),
         UNIQUE (name),
-        FOREIGN KEY (product_type) REFERENCES product_kinds(id) ON DELETE RESTRICT
+        FOREIGN KEY (product_type) REFERENCES product_kinds(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 CREATE INDEX prod_name_index ON products(name);
 CREATE INDEX prod_price_index ON products(price);
