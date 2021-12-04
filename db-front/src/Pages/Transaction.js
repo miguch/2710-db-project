@@ -78,7 +78,7 @@ export default function Transactions() {
                 bordered
                 renderItem={(pt) => (
                   <List.Item>
-                    {pt.product?.name}
+                    {pt.product?.name || "Unknown"}
                     <div style={{ float: 'right' }}>
                       <span style={{ marginRight: 6 }}>
                         ${pt.price} x{pt.amount}
