@@ -4,6 +4,7 @@ import useAntTable from '../Hooks/Table';
 import useDataPage from '../Hooks/DataPage';
 import useDataHandlers from '../Hooks/Data';
 import useNetwork from '../Hooks/Network';
+import { useSelector } from 'react-redux';
 
 const TITLE = 'Store';
 const SCHEMA = [
@@ -45,7 +46,14 @@ const API = {
 };
 
 export default function Stores() {
-  const handlers = useDataHandlers(API);
+  const api = { ...API };
+  const userInfo = useSelector((state) => state.userInfo.userInfo);
+  if (userInfo?.role?.name !== 'Admin') {
+    delete api.update;
+    delete api.delete;
+    delete api.create
+  }
+  const handlers = useDataHandlers(api);
   const service = useNetwork();
   const defaultLoader = handlers.dataLoader;
   handlers.dataLoader = async (current, pageSize) => {

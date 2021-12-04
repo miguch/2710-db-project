@@ -69,7 +69,7 @@ const API = {
 export default function Salesperson() {
   const api = { ...API };
   const userInfo = useSelector((state) => state.userInfo.userInfo);
-  if (userInfo?.role?.name !== 'salesperson') {
+  if (userInfo?.role?.name !== 'Admin') {
     delete api.update;
   }
   const handlers = useDataHandlers(api);

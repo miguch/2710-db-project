@@ -52,7 +52,7 @@ const STATIC_ROUTES = [
     name: 'Store',
     link: '/store',
     path: '/store',
-    filterRole: ['salesperson'],
+    filterRole: ['salesperson', 'Admin'],
     component: lazy(() => import('../Pages/Store')),
     icon: ShopOutlined
   },
@@ -60,7 +60,7 @@ const STATIC_ROUTES = [
     name: 'Region',
     link: '/region',
     path: '/region',
-    filterRole: ['salesperson'],
+    filterRole: ['salesperson', 'Admin'],
     component: lazy(() => import('../Pages/Region')),
     icon: ContactsOutlined
   },

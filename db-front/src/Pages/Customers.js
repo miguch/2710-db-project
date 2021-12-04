@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useAntTable from '../Hooks/Table';
 import useDataPage from '../Hooks/DataPage';
 import useDataHandlers from '../Hooks/Data';
+import { useSelector } from 'react-redux';
 
 const TITLE = 'Customer';
 
@@ -15,7 +16,13 @@ const API = {
 };
 
 export default function Customer() {
-  const handlers = useDataHandlers(API);
+  const api = { ...API };
+  const userInfo = useSelector((state) => state.userInfo.userInfo);
+  if (userInfo?.role?.name !== 'Admin') {
+    delete api.update;
+    delete api.delete;
+  }
+  const handlers = useDataHandlers(api);
 
   const [details, setDetails] = useState(null);
 
