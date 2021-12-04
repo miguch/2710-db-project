@@ -1,6 +1,13 @@
 # 2710-db-project
 
 The final project for INFSCI 2710.
+Demo site: https://2710.miguch.com
+
+## Progress after the demo
+After the demo, we added a admin role to our front-end with a fixed admin user. This user is added by modifying the database directly.
+Username: admin
+password: admin123
+The admin user is the only user that has the permission to control user, stores and region data. Other users will still be able to see those data lists, but won't be able to make change to the records.
 
 ## How to deploy
 Prerequisite: Docker, docker-compose
