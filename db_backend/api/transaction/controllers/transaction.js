@@ -51,9 +51,11 @@ module.exports = {
         }
         await Promise.all(
           item.product_transactions.map(async (pt) => {
-            pt.product = await strapi.services.product.findOne({
-              id: pt.product,
-            });
+            if (pt.product) {
+              pt.product = await strapi.services.product.findOne({
+                id: pt.product,
+              });
+            }
           })
         );
       })
